@@ -21,7 +21,7 @@ This site covers two local tools for people who let AI agents work on their mach
 - Goal: agent detection and response for AI agents. Learn what is normal for each agent on the computer, flag what is not, and contain the agent.
 - Built: a desktop console (Windows build tested) that runs on sample data, and a read-only live view of Cephalo's audit log on the same machine.
 - In development, not released: an approval pop-up for actions Cephalo holds (Claude Code only). It needs a Cephalo change that has not shipped.
-- Planned, not built: per-agent baselines, anomaly flags, containment.
+- SideEye, built in its Windows console (not downloadable yet): reads Cephalo's log, learns a baseline per agent, raises alerts from twelve detections, suggests Cephalo rules with replay, and can hold, quarantine or end an agent. Holding needs a Cephalo change that is not released. Planned: owners and teams, other runtimes, signed installers, tamper protection.
 - Limit: today it detects nothing on its own.
 - Site: https://nomajorconcerns.github.io/sideeye/
 
@@ -37,6 +37,6 @@ No cookies, no analytics, no third-party requests.
 
 - Layered defence, and a side-by-side split view: Cephalo's verdicts come from its real published 0.1.1 built-in rules (12 rules). SideEye's side is scripted, because SideEye detects nothing yet.
 - What each layer catches: includes attacks neither covers (a command assembled inside a script; anything running as the user outside the agent's hooks).
-- How they fit together: SideEye reads Cephalo's audit log (built, read only). SideEye answering Cephalo's "ask" is in development and not in a released Cephalo. Everything else between them is Planned.
+- How they fit together: SideEye reads Cephalo's audit log (built, read only) and builds baselines and alerts from it. SideEye answering Cephalo's "ask", and holding or quarantining an agent through Cephalo, are in development and not in a released Cephalo. SideEye can write a suggested rule to a file; you copy it into Cephalo's rules file yourself. Shared alerts and settings are Planned.
 - Which do I need, install tabs (Cephalo only / SideEye only / Both), bundle calculator on Planned prices. No checkout, no email capture.
 - Pricing: Planned. Prices may change. Not on sale yet.

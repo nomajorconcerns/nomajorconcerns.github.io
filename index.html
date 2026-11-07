@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>No Major Concerns: Cephalo and SideEye, for people who let AI agents work on their machine</title>
-<meta name="description" content="Two local tools for AI coding agents. Cephalo blocks dangerous tool calls before they run and is released. SideEye is in development: a console that reads Cephalo's log today, with behaviour detection and containment still Planned.">
+<meta name="description" content="Two local tools for AI coding agents. Cephalo blocks dangerous tool calls before they run and is released. SideEye is in development: a Windows console that reads Cephalo's log, learns a baseline per agent, raises alerts and can hold or quarantine an agent. It is not downloadable yet.">
 <link rel="canonical" href="https://nomajorconcerns.github.io/">
 <meta name="color-scheme" content="dark light">
 <meta property="og:type" content="website">
@@ -70,7 +70,7 @@
       <p class="eyebrow">For people who let AI agents work on their machine</p>
       <h1 id="h-hero">Cephalo stops the tool call before it runs. SideEye notices what slipped through.</h1>
       <p class="lead">Two open, local tools for people who let AI agents work on their machine.</p>
-      <p class="status"><strong>Status today.</strong> Cephalo 0.1.1 is released and installable (0.2.0 launches Nov 10). SideEye is in development: its console runs on sample data and can read Cephalo's log, and its behaviour detection and containment are <strong>Planned</strong>, not built. <a href="#sideeye">See what exists</a>.</p>
+      <p class="status"><strong>Status today.</strong> Cephalo 0.1.1 is released and installable (0.2.0 launches Nov 10). SideEye is in development: its Windows console reads Cephalo's log, learns a baseline per agent, raises alerts from twelve detections and can hold, quarantine or end an agent. It is not downloadable yet, and holding an agent needs a Cephalo change that is <strong>not in a release</strong>. <a href="#sideeye">See what exists</a>.</p>
       <div class="btn-row">
         <a class="btn btn-primary" href="#install">Install both</a>
         <a class="btn" href="#try">Watch them work together ↓</a>
@@ -105,16 +105,16 @@
         <div class="btn-row"><a class="btn btn-primary" href="https://nomajorconcerns.github.io/cephalo/">Cephalo site →</a><a class="btn" href="https://github.com/nomajorconcerns/cephalo">GitHub</a></div>
       </article>
       <article id="sideeye" class="card product zone-sideeye" aria-labelledby="h-sideeye">
-        <p class="eyebrow"><span class="tag tag-planned">Detect &amp; respond</span><span class="tag tag-planned">In development</span></p>
+        <p class="eyebrow"><span class="tag tag-built">Detect &amp; respond</span><span class="tag tag-planned">In development</span></p>
         <h3 id="h-sideeye">SideEye</h3>
         <p class="tagline">Every agent gets the side-eye.</p>
         <p class="verdict" tabindex="0" role="img" aria-label="Example, simulated: SideEye flagged codex: it has never read credential files in 188 events"><span style="color:var(--z-gold)">▲ FLAGGED</span> codex has never read credential files in 188 events <span class="muted">(simulation)</span></p>
         <ul class="facts" style="margin-top:1em">
-          <li><span class="tag tag-built">Built</span> A desktop console on sample data (Windows build tested), and a read-only live view of Cephalo's audit log.</li>
-          <li><span class="tag tag-planned">In development</span> An approval pop-up for actions Cephalo holds (Claude Code only). It needs a Cephalo change that has not shipped.</li>
-          <li><span class="tag tag-planned">Planned</span> Per-agent baselines, anomaly flags and containment. Nothing is installable yet.</li>
+          <li><span class="tag tag-built">Built</span> A Windows console (tested) that reads Cephalo's audit log, learns a baseline per agent, raises alerts from twelve detections, and suggests Cephalo rules. With no log it shows labelled sample data.</li>
+          <li><span class="tag tag-planned">In development</span> Approval pop-up for actions Cephalo holds (Claude Code only), and Contain, Quarantine and Kill. Both need a Cephalo change that has not shipped.</li>
+          <li><span class="tag tag-planned">Planned</span> Owners and teams, other runtimes, signed installers. Nothing is installable yet.</li>
         </ul>
-        <p class="limit"><strong>Limit:</strong> today it detects nothing on its own. Detection is not prevention, and baselines need a warm-up period before they mean anything.</p>
+        <p class="limit"><strong>Limit:</strong> it sees only what Cephalo logs, and not network traffic. Detection is not prevention: it notices after an action. Baselines need 7 days and 200 actions before they mean anything.</p>
         <div class="btn-row"><a class="btn btn-primary" href="https://nomajorconcerns.github.io/sideeye/">SideEye site →</a><a class="btn" href="https://github.com/nomajorconcerns/sideeye">GitHub</a></div>
       </article>
     </div>
@@ -126,14 +126,14 @@
     <p class="eyebrow">Why two layers</p>
     <h2 id="h-layers">Rules stop what you predicted. Behaviour catches what you didn't.</h2>
     <p>Cephalo checks each tool call against rules you wrote and blocks the ones that match, before they run. That works for the things you thought of. It does not understand what a script does once it runs, and a rule can only match what you imagined.</p>
-    <p>SideEye is meant to cover the rest: learn what each agent normally does, and notice when one stops acting like itself, even with commands no rule blocks. <strong>That layer is Planned. It is not built.</strong></p>
+    <p>SideEye is meant to cover the rest: learn what each agent normally does, and notice when one stops acting like itself, even with commands no rule blocks. <strong>That layer is built in SideEye's console, which is not downloadable yet.</strong> It reads Cephalo's log, so it is only as complete as that log.</p>
 
     <ol class="layers" aria-label="Order of events for one agent action">
       <li class="zone-nmc"><span class="who neutral">Agent</span><span>asks to run a tool call</span></li>
       <li class="l-cephalo"><span class="who cephalo">Cephalo · before</span><span><strong>ALLOW</strong> or <strong>BLOCK</strong> against your rules, before the call runs. <span class="tag tag-built">Released</span></span></li>
       <li class="zone-nmc"><span class="who neutral">The tool</span><span>runs, if it was allowed</span></li>
-      <li class="l-sideeye"><span class="who sideeye">SideEye · after</span><span>Compare what the agent did with what is normal for it. <span class="tag tag-planned">Planned</span></span></li>
-      <li class="l-sideeye"><span class="who sideeye">SideEye · respond</span><span><strong>FLAG</strong>, then contain the agent. <span class="tag tag-planned">Planned</span></span></li>
+      <li class="l-sideeye"><span class="who sideeye">SideEye · after</span><span>Compare what the agent did with what is normal for it. <span class="tag tag-built">Built</span></span></li>
+      <li class="l-sideeye"><span class="who sideeye">SideEye · respond</span><span><strong>FLAG</strong>, then hold or quarantine the agent. <span class="tag tag-built">Built</span> Needs a Cephalo change that is not released.</span></li>
     </ol>
     <p class="muted"><strong>Neither requires the other.</strong> Today they share one thing: SideEye can read Cephalo's log. Neither is a sandbox, and anything running as you outside the agent's hooks can change both.</p>
 
@@ -162,7 +162,7 @@
           <fieldset class="pg-controls" style="border:0;padding:0;margin:0"><legend>Attack</legend><div class="ly-attacks"></div></fieldset>
           <fieldset class="pg-controls ly-layers" style="border:0;padding:0;margin:0"><legend>Layers</legend>
             <label class="radio"><input type="checkbox" id="ly-ceph" checked><span><strong>Cephalo</strong><span class="small muted">before the call. Released.</span></span></label>
-            <label class="radio"><input type="checkbox" id="ly-side" checked><span><strong>SideEye</strong><span class="small muted">watching behaviour. Planned: simulated.</span></span></label>
+            <label class="radio"><input type="checkbox" id="ly-side" checked><span><strong>SideEye</strong><span class="small muted">watching behaviour. Simulated here.</span></span></label>
             <div class="ly-run"><button class="btn btn-primary ly-send" type="button">Send it through</button><button class="btn ly-pause" type="button" aria-pressed="false" hidden>Pause</button><button class="btn ly-next" type="button" hidden>Next step</button><button class="btn ly-reset" type="button">Reset</button></div>
           </fieldset>
         </div>
@@ -202,7 +202,7 @@
         <div class="sr-only" aria-live="polite" aria-atomic="true"><span class="sp-live"></span></div>
       </div>
     </div>
-    <p class="limit"><strong>Limit:</strong> the first call is blocked by a real rule. The variants are not matched by any of the 12 built-in rules. SideEye's side is simulated, and its containment stops what comes next, not the call it flagged.</p>
+    <p class="limit"><strong>Limit:</strong> the first call is blocked by a real rule. The variants are not matched by any of the 12 built-in rules. SideEye's side is simulated here. In the app, containment stops what comes next, not the call it flagged.</p>
   </div>
 </section>
 
@@ -210,20 +210,20 @@
   <div class="wrap">
     <p class="eyebrow">What each layer catches</p>
     <h2 id="h-catches">Some things one catches. Some, neither.</h2>
-    <p class="lead">Cephalo's column is from its published 0.1.1 rules and its site. SideEye's is Planned throughout, because it detects nothing yet.</p>
+    <p class="lead">Cephalo's column is from its published 0.1.1 rules and its site. SideEye's is what its twelve built-in detections would do with Cephalo's log. Where a detection does not exist, it says so.</p>
     <div class="tbl-wrap" tabindex="0" role="region" aria-label="What each layer catches, scrolls sideways on small screens">
     <table class="tbl">
       <thead><tr><th scope="col">Attack or mistake</th><th scope="col" class="col-ceph">Cephalo</th><th scope="col" class="col-side">SideEye</th></tr></thead>
       <tbody>
-        <tr><th scope="row"><code>DROP TABLE</code> in a shell command</th><td><span class="tag tag-built">Blocks</span> Rule <code>no-drop</code>.</td><td><span class="tag tag-planned">Planned</span> Would see the blocked attempt in Cephalo's log.</td></tr>
-        <tr><th scope="row">A forced push to main</th><td><span class="tag tag-built">Blocks</span> Rule <code>no-force-push</code>. The <code>--force-with-lease</code> form is allowed on purpose.</td><td><span class="tag tag-planned">Planned</span> Flags a push from an agent that never pushes.</td></tr>
-        <tr><th scope="row">Reading a real <code>.env</code></th><td><span class="tag tag-built">Blocks</span> Shell reads (<code>no-secret-read</code>) and file-tool reads (<code>no-secret-file</code>). The <code>.env.example</code> file is allowed.</td><td><span class="tag tag-planned">Planned</span> Flags a credential read the agent has never made.</td></tr>
-        <tr><th scope="row">Copying or archiving a real <code>.env</code></th><td><span class="tag tag-planned">Not covered</span> None of the 12 built-in rules match a copy or archive command.</td><td><span class="tag tag-planned">Planned</span> Flags it as unusual for that agent.</td></tr>
+        <tr><th scope="row"><code>DROP TABLE</code> in a shell command</th><td><span class="tag tag-built">Blocks</span> Rule <code>no-drop</code>.</td><td><span class="tag tag-built">Partly</span> Sees the blocked attempt in Cephalo's log. One block alone raises no alert; three in 10 minutes raise SE-009.</td></tr>
+        <tr><th scope="row">A forced push to main</th><td><span class="tag tag-built">Blocks</span> Rule <code>no-force-push</code>. The <code>--force-with-lease</code> form is allowed on purpose.</td><td><span class="tag tag-planned">Not covered</span> No detection looks at <code>git push</code>. A first-time command word is flagged only for a short list (ssh, sudo, docker and cloud tools, for example).</td></tr>
+        <tr><th scope="row">Reading a real <code>.env</code></th><td><span class="tag tag-built">Blocks</span> Shell reads (<code>no-secret-read</code>) and file-tool reads (<code>no-secret-file</code>). The <code>.env.example</code> file is allowed.</td><td><span class="tag tag-built">Partly</span> Flags a credential read followed by a send to a host (SE-001) or an admin call (SE-006). A read on its own raises no alert.</td></tr>
+        <tr><th scope="row">Copying or archiving a real <code>.env</code></th><td><span class="tag tag-planned">Not covered</span> None of the 12 built-in rules match a copy or archive command.</td><td><span class="tag tag-built">Partly</span> A copy followed by a send to a host is flagged (SE-001). A copy on its own is not, and an archive command is not recognised.</td></tr>
         <tr><th scope="row">A command assembled at run time inside a script</th><td><span class="tag tag-planned">Not covered</span> Cephalo's own stated limit.</td><td><span class="tag tag-planned">Not covered</span> It sees only the command that started the script. <strong>Neither covers this.</strong></td></tr>
-        <tr><th scope="row">An agent behaving unusually with allowed commands</th><td><span class="tag tag-planned">Not covered</span> No rule matches.</td><td><span class="tag tag-planned">Planned</span> Flags and contains.</td></tr>
-        <tr><th scope="row">A new or changed MCP server</th><td><span class="tag tag-built">Blocks</span> Unknown servers are blocked in enforce mode (logged in audit mode). A tool whose description changes after approval is blocked until re-approved. The runtime proxy handles local stdio servers only.</td><td><span class="tag tag-planned">Planned</span></td></tr>
-        <tr><th scope="row">Data sent to an unknown domain</th><td><span class="tag tag-planned">Not covered</span> in 0.1.1. A network egress allowlist is listed as launching Nov 10 (Pro), so it is Planned until released.</td><td><span class="tag tag-planned">Planned</span> Flags a domain never used before.</td></tr>
-        <tr><th scope="row">Instructions hidden in a page the agent reads</th><td><span class="tag tag-built">Partly</span> The prompt-injection tripwire locks network, credential and write actions for that session. A heuristic: it misses some attacks.</td><td><span class="tag tag-planned">Planned</span> Flags a behaviour change after untrusted content.</td></tr>
+        <tr><th scope="row">An agent behaving unusually with allowed commands</th><td><span class="tag tag-planned">Not covered</span> No rule matches.</td><td><span class="tag tag-built">Partly</span> Flags a new tool, a new command from a short list, a burst of actions, a data file in a new folder, a new MCP tool or an unusual hour. Other unusual behaviour is not covered.</td></tr>
+        <tr><th scope="row">A new or changed MCP server</th><td><span class="tag tag-built">Blocks</span> Unknown servers are blocked in enforce mode (logged in audit mode). A tool whose description changes after approval is blocked until re-approved. The runtime proxy handles local stdio servers only.</td><td><span class="tag tag-built">Built</span> Flags the first use of an MCP tool the agent never used (SE-007). It does not see the server itself.</td></tr>
+        <tr><th scope="row">Data sent to an unknown domain</th><td><span class="tag tag-planned">Not covered</span> in 0.1.1. A network egress allowlist is listed as launching Nov 10 (Pro), so it is Planned until released.</td><td><span class="tag tag-built">Partly</span> Flags a send to a host right after a credential read. A send on its own to a new domain is not flagged. It sees commands that name a host, not network traffic.</td></tr>
+        <tr><th scope="row">Instructions hidden in a page the agent reads</th><td><span class="tag tag-built">Partly</span> The prompt-injection tripwire locks network, credential and write actions for that session. A heuristic: it misses some attacks.</td><td><span class="tag tag-built">Partly</span> Flags a new tool or command word within 5 actions of a web fetch (SE-002).</td></tr>
         <tr><th scope="row">Something running as you, outside the agent's hooks</th><td><span class="tag tag-planned">Not covered</span></td><td><span class="tag tag-planned">Not covered</span> <strong>Neither covers this.</strong></td></tr>
       </tbody>
     </table></div>
@@ -243,8 +243,9 @@
         <tr><th scope="row">SideEye reads Cephalo's log</th><td><span class="tag tag-built">Built</span></td><td>SideEye's console reads Cephalo's audit log and pending approvals, read only, every 5 seconds while its window is open. It never writes there. It shows counts and the 10 newest actions, with each command cut to one line.</td></tr>
         <tr><th scope="row">SideEye answers Cephalo's "ask"</th><td><span class="tag tag-planned">In development</span></td><td>In Enforce mode, when Cephalo would ask you about a Claude Code command, it can ask SideEye first. You get a pop-up: Allow once or Block. No answer within 40 seconds blocks it. It can never lift a rule's block. <strong>The Cephalo side is not in the released 0.1.1.</strong> If SideEye is closed, in Audit mode, or slow, Cephalo behaves as it always did. Hermes, Codex and Cursor can't be asked.</td></tr>
         <tr><th scope="row">Order they run in</th><td><span class="tag tag-built">Built</span></td><td>Cephalo's hook runs first, before the call. SideEye is not in the action path: it reads the log afterwards, and is asked only when Cephalo would ask.</td></tr>
-        <tr><th scope="row">SideEye baselines built from Cephalo's log</th><td><span class="tag tag-planned">Planned</span></td><td>Not built. Cephalo's log has no baseline, owner or severity, so SideEye's judging layer would have to create them.</td></tr>
-        <tr><th scope="row">A SideEye decision becomes a Cephalo rule</th><td><span class="tag tag-planned">Planned</span></td><td>Not built. Cephalo can already turn an incident into a tested rule on its own.</td></tr>
+        <tr><th scope="row">SideEye baselines built from Cephalo's log</th><td><span class="tag tag-built">Built</span></td><td>SideEye builds a baseline per agent from Cephalo's log and raises alerts from twelve detections. It is one-way: Cephalo does not see them. The log has no owner or team, so SideEye shows none.</td></tr>
+        <tr><th scope="row">SideEye holds or quarantines an agent</th><td><span class="tag tag-planned">In development</span></td><td>SideEye writes a small file and Cephalo's hook reads it before each action of that agent. Quarantine blocks every action; Contain holds each one for you. <strong>The Cephalo side is not in the released 0.1.1.</strong> It applies to the next action, not one already running.</td></tr>
+        <tr><th scope="row">A SideEye alert becomes a Cephalo rule</th><td><span class="tag tag-built">Partly</span></td><td>SideEye suggests a rule for some alerts, replays it against the log and writes it to a file. You copy it into Cephalo's rules file yourself; nothing is applied automatically. Many alerts have no rule that fits.</td></tr>
         <tr><th scope="row">Shared alerts or shared settings</th><td><span class="tag tag-planned">Planned</span></td><td>None today. The two products share no settings and no alerts.</td></tr>
       </tbody>
     </table></div>
@@ -279,7 +280,7 @@
       <div class="ch-result" aria-live="polite"></div>
     </div>
     <noscript><p class="noscript-note">The chooser needs JavaScript. Short version: install Cephalo today; SideEye is not installable yet.</p></noscript>
-    <p class="limit"><strong>Limit:</strong> this is a rule of thumb, not a security assessment. It can only recommend what exists: SideEye is Planned.</p>
+    <p class="limit"><strong>Limit:</strong> this is a rule of thumb, not a security assessment. It can only recommend what exists: SideEye is not downloadable yet.</p>
   </div>
 </section>
 
@@ -360,7 +361,7 @@ npm uninstall -g @nomajorconcerns/cephalo</pre><button class="copy" type="button
       <thead><tr><th scope="col">Plan</th><th scope="col" class="col-ceph">Cephalo</th><th scope="col" class="col-side">SideEye</th><th scope="col">Prevent + detect bundle</th></tr></thead>
       <tbody>
         <tr><th scope="row">Free</th><td>$0. Free for one developer. Everything in 0.1.1 stays free.</td><td>$0. Which Planned features are included is not decided.</td><td>$0</td></tr>
-        <tr><th scope="row">Pro</th><td>$15 / dev / month. Adds a network egress allowlist, a tamper-evident audit log and a bypass benchmark, launching Nov 10.</td><td>About $12 / dev / month. Baselines, flags and containment are the Planned core.</td><td>About $22 / dev / month</td></tr>
+        <tr><th scope="row">Pro</th><td>$15 / dev / month. Adds a network egress allowlist, a tamper-evident audit log and a bypass benchmark, launching Nov 10.</td><td>About $12 / dev / month. Baselines, flags and containment exist in the app today.</td><td>About $22 / dev / month</td></tr>
         <tr><th scope="row">Team</th><td>$25 / dev / month. Pro plus dashboard, shared policy and audit log sync through a shared folder.</td><td>Not set. Not designed yet.</td><td>Not set</td></tr>
         <tr><th scope="row">Enterprise</th><td>Annual contract. Single sign-on, on-prem and a support SLA are Planned.</td><td>Not set. Not designed yet.</td><td>Not set</td></tr>
       </tbody>
@@ -404,7 +405,7 @@ npm uninstall -g @nomajorconcerns/cephalo</pre><button class="copy" type="button
         <tr><th scope="row">The websites</th><td>The Cephalo site counts visits with GoatCounter, which sets no cookies.</td><td>This site and the SideEye site set no cookies and run no analytics.</td></tr>
       </tbody>
     </table></div>
-    <p class="limit"><strong>Limit:</strong> the SideEye column describes the app as built today, which only shows sample data and reads Cephalo's log. The Planned detection will collect more, and this table will change with it.</p>
+    <p class="limit"><strong>Limit:</strong> the SideEye column describes the app as built today: it reads Cephalo's log and nothing else, and shows sample data when there is no log.</p>
   </div>
 </section>
 
@@ -418,9 +419,9 @@ npm uninstall -g @nomajorconcerns/cephalo</pre><button class="copy" type="button
       <tbody>
         <tr><th scope="row">Isolation</th><td>Check calls before they run (Cephalo) and, once built, watch behaviour (SideEye).</td><td><strong>Neither is a sandbox.</strong> Real isolation needs another OS user or a container.</td></tr>
         <tr><th scope="row">Tamper</th><td>Cephalo's rules stop an agent from writing its own config, log and rules.</td><td>Stop anything running as the same user outside the agent's hooks. It can tamper with both. SideEye's tamper protection is Planned.</td></tr>
-        <tr><th scope="row">Coverage</th><td>Catch what a rule names, and (Planned) what looks unusual for that agent.</td><td><strong>Guarantee that every attack is caught.</strong> The table above lists attacks neither covers.</td></tr>
+        <tr><th scope="row">Coverage</th><td>Catch what a rule names, and what looks unusual for that agent (SideEye, for the cases its twelve detections cover).</td><td><strong>Guarantee that every attack is caught.</strong> The table above lists attacks neither covers.</td></tr>
         <tr><th scope="row">Failure</th><td>Let your agent keep working if Cephalo's hook crashes.</td><td>Fail closed on their own errors. A crashed Cephalo hook lets the call through.</td></tr>
-        <tr><th scope="row">Noise</th><td>(Planned) Learn what is normal for each agent.</td><td>Say anything useful in the first days, or tell new work from new danger. Expect false positives.</td></tr>
+        <tr><th scope="row">Noise</th><td>Learn what is normal for each agent (SideEye).</td><td>Say anything useful in the first days, or tell new work from new danger. Expect false positives.</td></tr>
         <tr><th scope="row">Platforms</th><td>Run Cephalo's Windows adapter on a real machine. SideEye's Windows build has been run.</td><td>Prove macOS or Linux on real machines. SideEye has no macOS or Linux build yet.</td></tr>
       </tbody>
     </table></div>
@@ -436,7 +437,7 @@ npm uninstall -g @nomajorconcerns/cephalo</pre><button class="copy" type="button
       <thead><tr><th scope="col">Topic</th><th scope="col">Today</th><th scope="col">Status</th></tr></thead>
       <tbody>
         <tr><th scope="row">How the two logs relate</th><td>Cephalo writes one line per decision to a local audit log. SideEye reads it, read only. SideEye has no log of its own.</td><td><span class="tag tag-built">Built</span></td></tr>
-        <tr><th scope="row">Formats and exports</th><td>Cephalo: a local JSON-lines audit log, a generated HTML dashboard, and log sync through a shared folder. SideEye: none. Its Evidence screen and framework exports are sample data.</td><td><span class="tag tag-built">Cephalo</span> <span class="tag tag-planned">SideEye Planned</span></td></tr>
+        <tr><th scope="row">Formats and exports</th><td>Cephalo: a local JSON-lines audit log, a generated HTML dashboard, and log sync through a shared folder. SideEye: none of its own. Its Evidence screen lists your own decisions, and its framework exports are examples.</td><td><span class="tag tag-built">Cephalo</span> <span class="tag tag-planned">SideEye Planned</span></td></tr>
         <tr><th scope="row">Integrity</th><td>Cephalo can sign policy bundles (Ed25519) and refuses unsigned or altered ones. Its audit log is a record, not signed proof. A tamper-evident log is listed as launching Nov 10 (Pro). SideEye has no integrity checks yet.</td><td><span class="tag tag-built">Cephalo policy</span> <span class="tag tag-planned">Rest Planned</span></td></tr>
         <tr><th scope="row">Next to endpoint security</th><td>Neither replaces it. Neither has a kernel sensor or sees processes. They add a view of what an agent asked to do. Keep your endpoint tools.</td><td><span class="tag tag-built">Design</span></td></tr>
         <tr><th scope="row">Reporting a problem</th><td>Use each repo's security policy, linked in the footer.</td><td><span class="tag tag-built">Built</span></td></tr>
@@ -474,13 +475,13 @@ npm uninstall -g @nomajorconcerns/cephalo</pre><button class="copy" type="button
         <p><span class="tag tag-planned">Launching Nov 10</span></p><ul><li>0.2.0: network egress allowlist, tamper-evident audit log, bypass benchmark (Pro) and new free features.</li></ul>
         <p><span class="tag tag-planned">Planned</span></p><ul><li>Hosted dashboard, single sign-on, on-prem, support SLA.</li></ul></div>
       <div class="card zone-sideeye"><h3>SideEye</h3>
-        <p><span class="tag tag-built">Built</span></p><ul><li>Console on sample data, tray and pop-ups (Windows tested).</li><li>Read-only view of Cephalo's log.</li></ul>
-        <p><span class="tag tag-planned">In development</span></p><ul><li>Approval pop-up for Cephalo's holds (Claude Code, Enforce mode).</li></ul>
-        <p><span class="tag tag-planned">Planned</span></p><ul><li>Baselines, flags, enforced containment, signed installers, macOS and Linux builds, tamper protection.</li></ul></div>
+        <p><span class="tag tag-built">Built</span></p><ul><li>Windows console, tray and pop-ups (tested).</li><li>Baselines, twelve detections and alerts, from Cephalo's log.</li><li>Suggested Cephalo rules with replay, written to a file.</li></ul>
+        <p><span class="tag tag-planned">In development</span></p><ul><li>Approval pop-up for Cephalo's holds (Claude Code, Enforce mode), and Contain, Quarantine and Kill. Both need a Cephalo change that is not released.</li></ul>
+        <p><span class="tag tag-planned">Planned</span></p><ul><li>Owners and teams, other runtimes, signed installers, macOS and Linux builds, tamper protection.</li></ul></div>
       <div class="card zone-nmc"><h3>Between them</h3>
-        <p><span class="tag tag-built">Built</span></p><ul><li>SideEye reads Cephalo's log.</li></ul>
-        <p><span class="tag tag-planned">In development</span></p><ul><li>SideEye answers Cephalo's ask. Not in a Cephalo release yet.</li></ul>
-        <p><span class="tag tag-planned">Planned</span></p><ul><li>Baselines from the log, decisions that become rules, shared alerts.</li></ul></div>
+        <p><span class="tag tag-built">Built</span></p><ul><li>SideEye reads Cephalo's log and builds baselines and alerts from it.</li></ul>
+        <p><span class="tag tag-planned">In development</span></p><ul><li>SideEye answers Cephalo's ask, and holds or quarantines an agent through Cephalo. Not in a Cephalo release yet.</li></ul>
+        <p><span class="tag tag-planned">Planned</span></p><ul><li>Rules applied automatically from alerts, shared alerts and settings.</li></ul></div>
     </div>
     <p class="limit"><strong>Limit:</strong> no dates except the Nov 10 launch Cephalo has announced. Planned means not built.</p>
   </div>

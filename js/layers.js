@@ -1,5 +1,5 @@
 // J1 Layered defence: Agent -> Cephalo -> tool runs -> SideEye -> outcome.
-// Cephalo verdicts use Cephalo's real published 0.1.1 rules. The SideEye layer is a SIMULATION of a Planned feature.
+// Cephalo verdicts use Cephalo's real published 0.1.1 rules. The SideEye layer is a SIMULATION of a feature the SideEye app has.
 import { reducedMotion, onMotionChange, whenVisible, loadJSON, evalCephalo, evRow, el, GLYPH } from "./engine.js";
 const root = document.getElementById("layers-demo");
 if (root) init(root).catch((e) => { console.error(e); root.querySelector(".ly-error")?.removeAttribute("hidden"); });
@@ -79,7 +79,7 @@ async function init(root) {
     decide.hidden = true; waiting = false;
     if (doContain) {
       state.contained = true; queue = [];
-      log.append(evRow("SideEye", "CONTAINED", "the agent is paused (a Planned feature, simulated)", "contained"));
+      log.append(evRow("SideEye", "CONTAINED", "the agent is quarantined (simulated; the app does this through a Cephalo change that is not released)", "contained"));
       setBox("sideeye", "CONTAINED", true); live.textContent = "SideEye: CONTAINED.";
       // anything left in the script did not happen
       for (let k = stepIdx + 1; k < attack.steps.length; k++) state.skipped.push(attack.steps[k].harm);
