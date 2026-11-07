@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-ns="se">
+<head>
+<title>SideEye: every agent gets the side-eye</title>
+<meta name="description" content="SideEye is agent detection and response for AI agents. In development: a desktop console on sample data. Baselines, flags and containment are planned.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{{cfg:siteUrl}}">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SideEye">
+<meta property="og:title" content="SideEye: every agent gets the side-eye">
+<meta property="og:description" content="Knows what normal looks like. Notices when it isn't. In development.">
+<meta property="og:url" content="{{cfg:siteUrl}}"><meta property="og:image" content="{{cfg:siteUrl}}og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A chameleon on a branch giving a sideways look, next to the line: Every agent gets the side-eye.">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{{cfg:siteUrl}}og.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+{{include:early-theme}}
+<link rel="stylesheet" href="css/site.css">
+<script src="js/ui.js" defer></script>
+</head>
+<body>
+{{sprite}}
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar zone-nmc"><div class="wrap">
+  <a class="brand" href="./">{{include:logo-mark}} SideEye</a>
+  <nav class="topnav" aria-label="Main"><a href="{{cfg:jointUrl}}">With Cephalo</a><a href="{{cfg:cephaloUrl}}">Cephalo</a></nav>
+  {{include:controls}}
+</div></header>
+<main id="main">
+<section class="zone-sideeye" aria-labelledby="h-hero" style="padding-top:clamp(32px,6vw,72px)">
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">In development &middot; not released</p>
+      <h1 id="h-hero">Every agent gets the side-eye.</h1>
+      <p class="lead">Knows what normal looks like. Notices when it isn't.</p>
+      <p>SideEye is agent detection and response for AI agents. The goal is to learn what is normal for each agent on your computer, flag what is not, and contain the agent. It is meant to sit beside Cephalo, which blocks dangerous tool calls before they run, but neither requires the other.</p>
+      <p class="status" style="background:var(--z-surface)"><strong>What exists today.</strong> A desktop console (Windows build tested) running on sample data, and a read-only live view of Cephalo's audit log. Per-agent baselines, anomaly flags and containment are <strong>Planned</strong>, not built. Nothing is downloadable yet.</p>
+      <div class="btn-row"><a class="btn btn-primary" href="{{cfg:repo}}">Watch on GitHub</a><a class="btn" href="{{cfg:jointUrl}}">See how it fits with Cephalo</a></div>
+    </div>
+    <div class="hero-art">
+      {{chameleon:inline:normal}}
+      <p class="state-label" style="justify-content:center;margin-top:10px"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Normal</p>
+      <p class="voice" style="text-align:center" data-deco>Hm.</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="zone-nmc"><div class="wrap">
+  <p><span data-deco>No major concerns. Until there are.</span></p>
+  <p>I built Cephalo to block what I could predict. SideEye is for what I couldn't.</p>
+  <p><a href="{{cfg:jointUrl}}">No Major Concerns</a> &middot; <a href="{{cfg:cephaloUrl}}">Cephalo</a> &middot; <a href="{{cfg:repo}}">GitHub</a> &middot; <a href="{{cfg:repo}}/issues">Issues</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="agents.md">agents.md</a></p>
+  <p>No cookies, no analytics, no third-party requests.</p>
+</div></footer>
+</body></html>

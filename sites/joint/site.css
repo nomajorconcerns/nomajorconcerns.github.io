@@ -1,0 +1,5 @@
+/* Joint site only */
+.hero{display:grid;gap:32px;align-items:center}
+@media(min-width:900px){.hero{grid-template-columns:1.05fr 1fr}}
+.hero-art{min-width:0}
+.hero h1{max-width:20ch}

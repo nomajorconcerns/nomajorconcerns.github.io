@@ -1,0 +1,24 @@
+<ol class="steps">
+  <li data-step="node"><label><input type="checkbox"> Check you have Node.js</label>
+    <div class="step-body"><p>Node.js 20 or newer. You also need Claude Code, Hermes, or both.</p>
+    <div class="code"><pre>node --version</pre><button class="copy" type="button">Copy</button></div></div></li>
+  <li data-step="install"><label><input type="checkbox"> Install it from npm</label>
+    <div class="step-body"><p>One command, the same on every system.</p>
+    <div class="code"><pre>npm install -g @nomajorconcerns/cephalo</pre><button class="copy" type="button">Copy</button></div>
+    <p>Then <code>cephalo --help</code> should show the banner and command list.</p></div></li>
+  <li data-step="init"><label><input type="checkbox"> Run <code>cephalo init</code></label>
+    <div class="step-body"><p>It prints a plan first, asks before changing anything, creates <code>~/.cephalo/rules.yml</code> from the defaults, and adds its hook to Claude Code and (if found) Hermes. Every file it edits is backed up to <code>&lt;file&gt;.cephalo-backup-&lt;timestamp&gt;</code>.</p>
+    <div class="code"><pre>cephalo init</pre><button class="copy" type="button">Copy</button></div></div></li>
+  <li data-step="restart"><label><input type="checkbox"> Restart Claude Code</label>
+    <div class="step-body"><p>Claude Code reads hooks when it starts, so a running session will not pick up the new hook.</p></div></li>
+  <li data-step="hermes"><label><input type="checkbox"> Approve the hook in Hermes (only if you use Hermes)</label>
+    <div class="step-body"><p>Hermes skips a hook command until you approve it once. Start an interactive <code>hermes</code>, accept the prompt, then check the list. It should say <em>allowed</em>, not <em>not allowed</em>.</p>
+    <div class="code"><pre>hermes hooks list
+hermes hooks doctor</pre><button class="copy" type="button">Copy</button></div></div></li>
+  <li data-step="verify"><label><input type="checkbox"> Verify</label>
+    <div class="step-body"><p><code>doctor</code> checks the rules file, runs a self-test and confirms the hooks. Then prove a block, and watch decisions arrive live.</p>
+    <div class="code"><pre>cephalo doctor
+cephalo test "DR&#79;P TABLE users"
+cephalo watch</pre><button class="copy" type="button">Copy</button></div></div></li>
+</ol>
+<p class="fineprint"><span id="step-count" aria-live="polite">0 of 6 done</span> · Progress is saved in this browser only. <button class="toggle" id="steps-reset" type="button">Reset</button></p>
