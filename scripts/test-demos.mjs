@@ -52,7 +52,7 @@ async function open(opts = {}) {
   await page.getByRole("button", { name: "Install a new MCP server" }).click();
   check("hermes MCP install flagged as rare", (await page.locator("#playground .lane").nth(2).getAttribute("data-state")) === "flagged" && /only 4 times in 305/.test(await page.locator("#playground li[data-kind=flagged] .why").innerText()));
   // determinism: same seed -> same first rows after reset
-  await page.click(".pg-reset"); const a = await page.locator("#playground .feed").first().innerText();
+  await page.click(".pg-pause"); await page.click(".pg-reset"); const a = await page.locator("#playground .feed").first().innerText();
   await page.click(".pg-reset"); const b = await page.locator("#playground .feed").first().innerText();
   check("seeded: reset gives identical rows", a === b);
 

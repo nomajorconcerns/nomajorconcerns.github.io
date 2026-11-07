@@ -7,6 +7,8 @@ const server = await start(4173);
 const browser = await chromium.launch({ channel: "msedge" });
 const sites = { joint: "http://127.0.0.1:4173/", sideeye: "http://127.0.0.1:4173/sideeye/" };
 let bad = 0;
+async function settle(p){await p.evaluate(async()=>{for(let y=0;y<document.body.scrollHeight;y+=600){scrollTo(0,y);await new Promise(r=>setTimeout(r,40))}scrollTo(0,0)});await p.waitForTimeout(800)}
+
 for (const [name, url] of Object.entries(sites)) {
   for (const pages of ["", "404.html", "privacy.html"]) {
     for (const theme of ["dark", "light"]) {
@@ -15,7 +17,7 @@ for (const [name, url] of Object.entries(sites)) {
         const page = await ctx.newPage();
         const hosts = new Set(); page.on("request", (r) => { const u = new URL(r.url()); if (u.protocol.startsWith("http")) hosts.add(u.host); });
         await page.goto(url + pages); await page.evaluate(() => document.fonts.ready);
-        await page.evaluate(axeSrc);
+        await settle(page); await page.evaluate(axeSrc);
         const r = await page.evaluate(() => axe.run(document, { runOnly: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa", "best-practice"] }));
         const v = r.violations.filter((x) => x.id !== "region" || true);
         const sw = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
