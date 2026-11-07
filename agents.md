@@ -32,3 +32,11 @@ Neither requires the other. Cephalo prevents (blocks a tool call before it runs)
 ## This site
 
 No cookies, no analytics, no third-party requests.
+
+## Interactive parts of this site (all labelled Simulation)
+
+- Layered defence, and a side-by-side split view: Cephalo's verdicts come from its real published 0.1.1 built-in rules (12 rules). SideEye's side is scripted, because SideEye detects nothing yet.
+- What each layer catches: includes attacks neither covers (a command assembled inside a script; anything running as the user outside the agent's hooks).
+- How they fit together: SideEye reads Cephalo's audit log (built, read only). SideEye answering Cephalo's "ask" is in development and not in a released Cephalo. Everything else between them is Planned.
+- Which do I need, install tabs (Cephalo only / SideEye only / Both), bundle calculator on Planned prices. No checkout, no email capture.
+- Pricing: Planned. Prices may change. Not on sale yet.

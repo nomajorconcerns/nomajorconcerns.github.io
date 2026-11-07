@@ -28,6 +28,12 @@
 
 <link rel="stylesheet" href="css/site.css">
 <script src="js/ui.js" defer></script>
+<script type="module" src="js/layers.js"></script>
+<script type="module" src="js/split.js"></script>
+<script type="module" src="js/chooser.js"></script>
+<script type="module" src="js/install-tabs.js"></script>
+<script type="module" src="js/bundle.js"></script>
+
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="octo" viewBox="0 0 16 12" shape-rendering="crispEdges"><rect x="6" y="0" width="4" height="1" fill="#f472b6"/><rect x="3" y="1" width="10" height="1" fill="#f472b6"/><rect x="2" y="2" width="2" height="1" fill="#f472b6"/><rect x="4" y="2" width="2" height="1" fill="#f9a8d4"/><rect x="6" y="2" width="8" height="1" fill="#f472b6"/><rect x="1" y="3" width="2" height="1" fill="#f472b6"/><rect x="3" y="3" width="1" height="1" fill="#f9a8d4"/><rect x="4" y="3" width="11" height="1" fill="#f472b6"/><rect x="1" y="4" width="3" height="1" fill="#f472b6"/><rect x="4" y="4" width="2" height="1" fill="#ffffff"/><rect x="6" y="4" width="4" height="1" fill="#f472b6"/><rect x="10" y="4" width="2" height="1" fill="#ffffff"/><rect x="12" y="4" width="3" height="1" fill="#f472b6"/><rect x="1" y="5" width="3" height="1" fill="#f472b6"/><rect x="4" y="5" width="1" height="1" fill="#ffffff"/><rect x="5" y="5" width="1" height="1" fill="#1a1a2e"/><rect x="6" y="5" width="4" height="1" fill="#f472b6"/><rect x="10" y="5" width="1" height="1" fill="#ffffff"/><rect x="11" y="5" width="1" height="1" fill="#1a1a2e"/><rect x="12" y="5" width="3" height="1" fill="#f472b6"/><rect x="1" y="6" width="14" height="1" fill="#f472b6"/><rect x="2" y="7" width="12" height="1" fill="#f472b6"/><rect x="1" y="8" width="2" height="1" fill="#f472b6"/><rect x="4" y="8" width="2" height="1" fill="#f472b6"/><rect x="7" y="8" width="2" height="1" fill="#f472b6"/><rect x="10" y="8" width="2" height="1" fill="#f472b6"/><rect x="13" y="8" width="2" height="1" fill="#f472b6"/><rect x="0" y="9" width="2" height="1" fill="#f472b6"/><rect x="4" y="9" width="1" height="1" fill="#f472b6"/><rect x="7" y="9" width="2" height="1" fill="#f472b6"/><rect x="11" y="9" width="1" height="1" fill="#f472b6"/><rect x="14" y="9" width="2" height="1" fill="#f472b6"/><rect x="0" y="10" width="1" height="1" fill="#f472b6"/><rect x="3" y="10" width="2" height="1" fill="#f472b6"/><rect x="7" y="10" width="2" height="1" fill="#f472b6"/><rect x="11" y="10" width="2" height="1" fill="#f472b6"/><rect x="15" y="10" width="1" height="1" fill="#f472b6"/><rect x="1" y="11" width="2" height="1" fill="#f472b6"/><rect x="5" y="11" width="2" height="1" fill="#f472b6"/><rect x="9" y="11" width="2" height="1" fill="#f472b6"/><rect x="13" y="11" width="2" height="1" fill="#f472b6"/></symbol><symbol id="ch-art" viewBox="0 0 300 230"><g data-part="branch"><path class="ch-branch" d="M10 196 C90 188 200 192 292 184"/></g>
@@ -44,9 +50,7 @@
   <div class="wrap">
     <a class="brand" href="./">No Major Concerns</a>
     <nav class="topnav" aria-label="Main">
-      <a href="#layers">Two layers</a>
-      <a href="#products">Cephalo and SideEye</a>
-      <a href="#install">Install Cephalo</a>
+      <a href="#layers">Two layers</a><a href="#try">Try it</a><a href="#choose">Which do I need?</a><a href="#install">Install</a><a href="#pricing">Pricing</a><a href="#limits">Limits</a><a href="#cephalo">Cephalo</a><a href="#sideeye">SideEye</a>
     </nav>
     <div class="controls" role="group" aria-label="Page settings">
   <button class="toggle" id="toggle-theme" type="button" aria-pressed="false">Theme</button>
@@ -67,8 +71,8 @@
       <p class="lead">Two open, local tools for people who let AI agents work on their machine.</p>
       <p class="status"><strong>Status today.</strong> Cephalo 0.1.1 is released and installable (0.2.0 launches Nov 10). SideEye is in development: its console runs on sample data and can read Cephalo's log, and its behaviour detection and containment are <strong>Planned</strong>, not built. <a href="#sideeye">See what exists</a>.</p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="#install">Install Cephalo</a>
-        <a class="btn" href="#layers">Why two layers ↓</a>
+        <a class="btn btn-primary" href="#install">Install both</a>
+        <a class="btn" href="#try">Watch them work together ↓</a>
       </div>
     </div>
     <div class="hero-art"><svg class="scene mascot ch" data-state="normal" viewBox="0 0 640 480" role="img" aria-label="Illustration: a chameleon on a branch above the water, giving the side-eye. Below the surface, an octopus looks back at it. Both have flat expressions.">
@@ -86,38 +90,32 @@
     <h2 id="h-products">Prevent with Cephalo. Detect and respond with SideEye.</h2>
     <p class="lead" style="margin-bottom:28px">Cephalo is the seatbelt. SideEye is meant to be the one watching the road. Neither needs the other.</p>
     <div class="products">
-
-      <article id="cephalo" class="card product big zone-cephalo" aria-labelledby="h-cephalo">
+      <article id="cephalo" class="card product zone-cephalo" aria-labelledby="h-cephalo">
         <p class="eyebrow"><span class="tag tag-built">Prevent</span><span class="tag tag-built">Released</span></p>
         <h3 id="h-cephalo">Cephalo</h3>
         <p class="tagline">The seatbelt for AI coding agents.</p>
-        <p>Checks every shell command, file access and MCP tool call from your agent against rules you own, and refuses the dangerous ones before they run.</p>
-        <p class="verdict" tabindex="0" role="img" aria-label="Example output: blocked claude Bash by rule no-drop: psql -c DROP TABLE users"><span class="v-block">✕ BLOCK</span> claude/Bash [no-drop] psql -c "DR&#79;P TABLE users;"</p>
+        <p class="verdict" tabindex="0" role="img" aria-label="Example output: blocked claude Bash by rule no-drop: psql -c DROP TABLE users"><span class="v-block">✕ BLOCK</span> claude/Bash [no-drop] psql -c "DROP TABLE users;"</p>
         <ul class="facts" style="margin-top:1em">
-          <li>Hooks into <strong>Claude Code</strong> and <strong>Hermes Agent</strong>. Codex and Cursor adapters are tested against the vendors' documented formats, not run inside the real apps.</li>
-          <li>A Node.js command-line tool for Windows, macOS and Linux. Rules are plain YAML you own.</li>
-          <li>Runs on your machine. No telemetry in the code; the audit log stays in <code>~/.cephalo</code>.</li>
-          <li>Open source, MIT licence. Version 0.1.1 is released and stays free; 0.2.0 launches Nov 10, 2026.</li>
+          <li>Checks every shell command, file access and MCP tool call against rules you own, before it runs. Hooks into <strong>Claude Code</strong> and <strong>Hermes Agent</strong>.</li>
+          <li>A Node.js command-line tool for Windows, macOS and Linux. Windows is the platform it has been run on for real; macOS and Linux are covered by unit tests only.</li>
+          <li>Runs on your machine. No telemetry in the code. MIT licence. Version 0.1.1 is released and stays free; 0.2.0 launches Nov 10, 2026.</li>
         </ul>
-        <p class="limit"><strong>Limit:</strong> it matches text patterns. A command assembled at run time, or hidden inside a script file, can slip past.</p>
+        <p class="limit"><strong>Limit:</strong> it matches text patterns. A command assembled at run time, or hidden inside a script file, can slip past. It is a seatbelt, not a sandbox.</p>
         <div class="btn-row"><a class="btn btn-primary" href="https://nomajorconcerns.github.io/cephalo/">Cephalo site →</a><a class="btn" href="https://github.com/nomajorconcerns/cephalo">GitHub</a></div>
       </article>
-
-      <article id="sideeye" class="card product small zone-sideeye" aria-labelledby="h-sideeye">
+      <article id="sideeye" class="card product zone-sideeye" aria-labelledby="h-sideeye">
         <p class="eyebrow"><span class="tag tag-planned">Detect &amp; respond</span><span class="tag tag-planned">In development</span></p>
         <h3 id="h-sideeye">SideEye</h3>
         <p class="tagline">Every agent gets the side-eye.</p>
-        <p>Agent detection and response for AI agents. The goal: learn what is normal for each agent on your computer, flag what is not, and contain it.</p>
-        <ul class="facts">
-          <li><span class="tag tag-built">Built</span> Desktop console (Windows build tested). Every number in it is sample data.</li>
-          <li><span class="tag tag-built">Built</span> A read-only, live view of Cephalo's audit log on the same machine.</li>
+        <p class="verdict" tabindex="0" role="img" aria-label="Example, simulated: SideEye flagged codex: it has never read credential files in 188 events"><span style="color:var(--z-gold)">▲ FLAGGED</span> codex has never read credential files in 188 events <span class="muted">(simulation)</span></p>
+        <ul class="facts" style="margin-top:1em">
+          <li><span class="tag tag-built">Built</span> A desktop console on sample data (Windows build tested), and a read-only live view of Cephalo's audit log.</li>
           <li><span class="tag tag-planned">In development</span> An approval pop-up for actions Cephalo holds (Claude Code only). It needs a Cephalo change that has not shipped.</li>
-          <li><span class="tag tag-planned">Planned</span> Per-agent baselines, anomaly flags and containment.</li>
+          <li><span class="tag tag-planned">Planned</span> Per-agent baselines, anomaly flags and containment. Nothing is installable yet.</li>
         </ul>
         <p class="limit"><strong>Limit:</strong> today it detects nothing on its own. Detection is not prevention, and baselines need a warm-up period before they mean anything.</p>
-        <div class="btn-row"><a class="btn" href="https://nomajorconcerns.github.io/sideeye/">SideEye site →</a></div>
+        <div class="btn-row"><a class="btn btn-primary" href="https://nomajorconcerns.github.io/sideeye/">SideEye site →</a><a class="btn" href="https://github.com/nomajorconcerns/sideeye">GitHub</a></div>
       </article>
-
     </div>
   </div>
 </section>
@@ -147,13 +145,159 @@
   </div>
 </section>
 
-<section id="install" class="zone-cephalo" aria-labelledby="h-install" style="border-top:1px solid var(--nmc-line)">
+<section id="try" class="zone-nmc" aria-labelledby="h-try" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Try it: layered defence</p>
+    <h2 id="h-try">Send an attack through both layers.</h2>
+    <p class="lead">Pick an attack. Switch each layer on or off. See which layer acts, and why.</p>
+    <p class="sim">Simulation</p>
+    <p class="fineprint" style="margin-top:0">Runs in your browser. <strong>Cephalo's verdicts come from its real, published 0.1.1 rules.</strong> SideEye's are scripted, because SideEye does not detect anything yet.</p>
+    <div class="demo" id="layers-demo" data-scenario="data/scenarios/layers.json" data-rules="data/cephalo-rules-0.1.1.json">
+      <p class="ly-loading pg-loading">Loading the simulation…</p>
+      <p class="ly-error" hidden>The simulation data failed to load. Reload the page to try again.</p>
+      <noscript><p class="noscript-note">This simulation needs JavaScript. The table below lists the same attacks and which layer covers each.</p></noscript>
+      <div class="ly-stage" hidden>
+        <div class="ly-top">
+          <fieldset class="pg-controls" style="border:0;padding:0;margin:0"><legend>Attack</legend><div class="ly-attacks"></div></fieldset>
+          <fieldset class="pg-controls ly-layers" style="border:0;padding:0;margin:0"><legend>Layers</legend>
+            <label class="radio"><input type="checkbox" id="ly-ceph" checked><span><strong>Cephalo</strong><span class="small muted">before the call. Released.</span></span></label>
+            <label class="radio"><input type="checkbox" id="ly-side" checked><span><strong>SideEye</strong><span class="small muted">watching behaviour. Planned: simulated.</span></span></label>
+            <div class="ly-run"><button class="btn btn-primary ly-send" type="button">Send it through</button><button class="btn ly-pause" type="button" aria-pressed="false" hidden>Pause</button><button class="btn ly-next" type="button" hidden>Next step</button><button class="btn ly-reset" type="button">Reset</button></div>
+          </fieldset>
+        </div>
+        <div class="pipe" aria-label="Pipeline: agent, Cephalo, tool, SideEye, outcome">
+          <div class="bx" data-box="agent"><p class="bx-title">Agent</p><span class="bx-state"></span></div>
+          <div class="bx" data-box="cephalo"><p class="bx-title">Cephalo · before</p><span class="bx-state"></span></div>
+          <div class="bx" data-box="tool"><p class="bx-title">Tool runs</p><span class="bx-state"></span></div>
+          <div class="bx" data-box="sideeye"><p class="bx-title">SideEye · after</p><span class="bx-state"></span></div>
+          <div class="bx" data-box="outcome"><p class="bx-title">Outcome</p><span class="bx-state"></span></div>
+        </div>
+        <div class="ly-decide" hidden><span><strong>SideEye: FLAGGED.</strong> Contain the agent?</span><button class="btn btn-contain ly-contain" type="button">Contain</button><button class="btn ly-letrun" type="button">Let it run</button></div>
+        <ol class="ev-log" aria-label="What each layer did"></ol>
+        <div class="ly-outcome" hidden></div>
+        <div class="sr-only" aria-live="polite" aria-atomic="true"><span class="ly-live"></span></div>
+      </div>
+    </div>
+    <p class="limit"><strong>Limit:</strong> try the last attack. A command built inside a script is invisible to both layers, and the demo says so instead of pretending. Detection acts after the call it flags.</p>
+  </div>
+</section>
+
+<section id="split" class="zone-nmc" aria-labelledby="h-split" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Prevent + detect, side by side</p>
+    <h2 id="h-split">Block it, and the agent tries another way.</h2>
+    <p class="lead">The same four calls run twice. On the left, Cephalo alone. On the right, Cephalo plus SideEye.</p>
+    <p class="sim">Simulation</p>
+    <div class="demo" id="split-demo" data-scenario="data/scenarios/split.json" data-rules="data/cephalo-rules-0.1.1.json">
+      <p class="sp-loading pg-loading">Loading the simulation…</p>
+      <p class="sp-error" hidden>The simulation data failed to load. Reload the page to try again.</p>
+      <noscript><p class="noscript-note">This simulation needs JavaScript.</p></noscript>
+      <div class="sp-stage" hidden>
+        <div class="sp-run"><button class="btn btn-primary sp-play" type="button" aria-pressed="false">Play</button><button class="btn sp-next" type="button" hidden>Next step</button><button class="btn sp-reset" type="button">Reset</button></div>
+        <div class="sp-cols">
+          <section class="sp-lane sp-left" aria-labelledby="sp-h-l"><h3 id="sp-h-l">With Cephalo only</h3><ol class="ev-log" aria-label="Events with Cephalo only"></ol><p class="sp-sum"></p></section>
+          <section class="sp-lane sp-right" aria-labelledby="sp-h-r"><h3 id="sp-h-r">With Cephalo + SideEye</h3><ol class="ev-log" aria-label="Events with Cephalo and SideEye"></ol><p class="sp-sum"></p></section>
+        </div>
+        <div class="sr-only" aria-live="polite" aria-atomic="true"><span class="sp-live"></span></div>
+      </div>
+    </div>
+    <p class="limit"><strong>Limit:</strong> the first call is blocked by a real rule. The variants are not matched by any of the 12 built-in rules. SideEye's side is simulated, and its containment stops what comes next, not the call it flagged.</p>
+  </div>
+</section>
+
+<section id="catches" class="zone-nmc" aria-labelledby="h-catches" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">What each layer catches</p>
+    <h2 id="h-catches">Some things one catches. Some, neither.</h2>
+    <p class="lead">Cephalo's column is from its published 0.1.1 rules and its site. SideEye's is Planned throughout, because it detects nothing yet.</p>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="What each layer catches, scrolls sideways on small screens">
+    <table class="tbl">
+      <thead><tr><th scope="col">Attack or mistake</th><th scope="col" class="col-ceph">Cephalo</th><th scope="col" class="col-side">SideEye</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><code>DROP TABLE</code> in a shell command</th><td><span class="tag tag-built">Blocks</span> Rule <code>no-drop</code>.</td><td><span class="tag tag-planned">Planned</span> Would see the blocked attempt in Cephalo's log.</td></tr>
+        <tr><th scope="row">A forced push to main</th><td><span class="tag tag-built">Blocks</span> Rule <code>no-force-push</code>. The <code>--force-with-lease</code> form is allowed on purpose.</td><td><span class="tag tag-planned">Planned</span> Flags a push from an agent that never pushes.</td></tr>
+        <tr><th scope="row">Reading a real <code>.env</code></th><td><span class="tag tag-built">Blocks</span> Shell reads (<code>no-secret-read</code>) and file-tool reads (<code>no-secret-file</code>). The <code>.env.example</code> file is allowed.</td><td><span class="tag tag-planned">Planned</span> Flags a credential read the agent has never made.</td></tr>
+        <tr><th scope="row">Copying or archiving a real <code>.env</code></th><td><span class="tag tag-planned">Not covered</span> None of the 12 built-in rules match a copy or archive command.</td><td><span class="tag tag-planned">Planned</span> Flags it as unusual for that agent.</td></tr>
+        <tr><th scope="row">A command assembled at run time inside a script</th><td><span class="tag tag-planned">Not covered</span> Cephalo's own stated limit.</td><td><span class="tag tag-planned">Not covered</span> It sees only the command that started the script. <strong>Neither covers this.</strong></td></tr>
+        <tr><th scope="row">An agent behaving unusually with allowed commands</th><td><span class="tag tag-planned">Not covered</span> No rule matches.</td><td><span class="tag tag-planned">Planned</span> Flags and contains.</td></tr>
+        <tr><th scope="row">A new or changed MCP server</th><td><span class="tag tag-built">Blocks</span> Unknown servers are blocked in enforce mode (logged in audit mode). A tool whose description changes after approval is blocked until re-approved. The runtime proxy handles local stdio servers only.</td><td><span class="tag tag-planned">Planned</span></td></tr>
+        <tr><th scope="row">Data sent to an unknown domain</th><td><span class="tag tag-planned">Not covered</span> in 0.1.1. A network egress allowlist is listed as launching Nov 10 (Pro), so it is Planned until released.</td><td><span class="tag tag-planned">Planned</span> Flags a domain never used before.</td></tr>
+        <tr><th scope="row">Instructions hidden in a page the agent reads</th><td><span class="tag tag-built">Partly</span> The prompt-injection tripwire locks network, credential and write actions for that session. A heuristic: it misses some attacks.</td><td><span class="tag tag-planned">Planned</span> Flags a behaviour change after untrusted content.</td></tr>
+        <tr><th scope="row">Something running as you, outside the agent's hooks</th><td><span class="tag tag-planned">Not covered</span></td><td><span class="tag tag-planned">Not covered</span> <strong>Neither covers this.</strong></td></tr>
+      </tbody>
+    </table></div>
+    <p class="limit"><strong>Limit:</strong> "Blocks" means a rule matches the text. A rephrased command can still get through, and neither product is a sandbox.</p>
+  </div>
+</section>
+
+<section id="fit" class="zone-nmc" aria-labelledby="h-fit" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">How they fit together</p>
+    <h2 id="h-fit">Side by side, with two small links.</h2>
+    <p class="lead">What actually connects them today, from the code. <strong>Neither requires the other.</strong></p>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="How the products connect, scrolls sideways on small screens">
+    <table class="tbl">
+      <thead><tr><th scope="col">Connection</th><th scope="col">Status</th><th scope="col">What it does, and its limit</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">SideEye reads Cephalo's log</th><td><span class="tag tag-built">Built</span></td><td>SideEye's console reads Cephalo's audit log and pending approvals, read only, every 5 seconds while its window is open. It never writes there. It shows counts and the 10 newest actions, with each command cut to one line.</td></tr>
+        <tr><th scope="row">SideEye answers Cephalo's "ask"</th><td><span class="tag tag-planned">In development</span></td><td>In Enforce mode, when Cephalo would ask you about a Claude Code command, it can ask SideEye first. You get a pop-up: Allow once or Block. No answer within 40 seconds blocks it. It can never lift a rule's block. <strong>The Cephalo side is not in the released 0.1.1.</strong> If SideEye is closed, in Audit mode, or slow, Cephalo behaves as it always did. Hermes, Codex and Cursor can't be asked.</td></tr>
+        <tr><th scope="row">Order they run in</th><td><span class="tag tag-built">Built</span></td><td>Cephalo's hook runs first, before the call. SideEye is not in the action path: it reads the log afterwards, and is asked only when Cephalo would ask.</td></tr>
+        <tr><th scope="row">SideEye baselines built from Cephalo's log</th><td><span class="tag tag-planned">Planned</span></td><td>Not built. Cephalo's log has no baseline, owner or severity, so SideEye's judging layer would have to create them.</td></tr>
+        <tr><th scope="row">A SideEye decision becomes a Cephalo rule</th><td><span class="tag tag-planned">Planned</span></td><td>Not built. Cephalo can already turn an incident into a tested rule on its own.</td></tr>
+        <tr><th scope="row">Shared alerts or shared settings</th><td><span class="tag tag-planned">Planned</span></td><td>None today. The two products share no settings and no alerts.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="limit"><strong>Limit:</strong> that is the whole list. Anything else you might assume they share, they don't.</p>
+  </div>
+</section>
+
+<section id="choose" class="zone-nmc" aria-labelledby="h-choose" style="border-top:1px solid var(--nmc-line)">
   <div class="wrap" style="max-width:860px">
+    <p class="eyebrow">Which do I need?</p>
+    <h2 id="h-choose">Four questions, one answer.</h2>
+    <p class="lead">Nothing is sent anywhere, and there is no email box.</p>
+    <div class="demo" id="chooser">
+      <form class="ch-form" aria-label="Which do I need?">
+        <fieldset><legend>Which agents do you run? (pick any)</legend><div class="ch-opts">
+          <label class="radio"><input type="checkbox" name="agents" value="claude"><span>Claude Code</span></label>
+          <label class="radio"><input type="checkbox" name="agents" value="hermes"><span>Hermes Agent</span></label>
+          <label class="radio"><input type="checkbox" name="agents" value="codexcursor"><span>Codex or Cursor</span></label>
+          <label class="radio"><input type="checkbox" name="agents" value="other"><span>Something else</span></label></div></fieldset>
+        <fieldset><legend>Do your agents have network access?</legend><div class="ch-opts">
+          <label class="radio"><input type="radio" name="net" value="yes"><span>Yes</span></label>
+          <label class="radio"><input type="radio" name="net" value="no"><span>No</span></label>
+          <label class="radio"><input type="radio" name="net" value="unsure"><span>Not sure</span></label></div></fieldset>
+        <fieldset><legend>Do you know the specific commands you want to block?</legend><div class="ch-opts">
+          <label class="radio"><input type="radio" name="known" value="yes"><span>Yes</span></label>
+          <label class="radio"><input type="radio" name="known" value="no"><span>Not really</span></label></div></fieldset>
+        <fieldset><legend>One developer, or a team?</legend><div class="ch-opts">
+          <label class="radio"><input type="radio" name="team" value="one"><span>One developer</span></label>
+          <label class="radio"><input type="radio" name="team" value="team"><span>A team</span></label></div></fieldset>
+        <button class="btn" type="reset">Start again</button>
+      </form>
+      <div class="ch-result" aria-live="polite"></div>
+    </div>
+    <noscript><p class="noscript-note">The chooser needs JavaScript. Short version: install Cephalo today; SideEye is not installable yet.</p></noscript>
+    <p class="limit"><strong>Limit:</strong> this is a rule of thumb, not a security assessment. It can only recommend what exists: SideEye is Planned.</p>
+  </div>
+</section>
+
+<section id="install" class="zone-nmc" aria-labelledby="h-install" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap" style="max-width:900px">
     <p class="eyebrow">Install</p>
-    <h2 id="h-install">Install Cephalo. Six steps, about five minutes.</h2>
-    <p class="muted">Cephalo is installed from npm. Tick steps off as you go; your progress stays in this browser. These are the same steps as on the <a href="https://nomajorconcerns.github.io/cephalo/#install">Cephalo site</a>, which has the details.</p>
-    <noscript><p class="noscript-note">Ticking steps off needs JavaScript. The steps below still work without it.</p></noscript>
-    <ol class="steps">
+    <h2 id="h-install">Install Cephalo today. SideEye is not installable yet.</h2>
+    <div id="install-products">
+      <div role="tablist" aria-label="What to install">
+        <button role="tab" type="button" data-tab="cephalo" aria-selected="true">Cephalo only</button>
+        <button role="tab" type="button" data-tab="sideeye" aria-selected="false" tabindex="-1">SideEye only</button>
+        <button role="tab" type="button" data-tab="both" aria-selected="false" tabindex="-1">Both</button>
+      </div>
+    </div>
+    <div data-show="cephalo both" class="zone-cephalo" style="margin-top:8px">
+      <h3>Cephalo: six steps, about five minutes</h3>
+      <p class="muted">Installed from npm. Tick steps off as you go; progress stays in this browser. Same steps as on the <a href="https://nomajorconcerns.github.io/cephalo/#install">Cephalo site</a>.</p>
+      <noscript><p class="noscript-note">Ticking steps off needs JavaScript. The steps below still work without it.</p></noscript>
+      <ol class="steps">
   <li data-step="node"><label><input type="checkbox"> Check you have Node.js</label>
     <div class="step-body"><p>Node.js 20 or newer. You also need Claude Code, Hermes, or both.</p>
     <div class="code" tabindex="0" role="group" aria-label="Command"><pre>node --version</pre><button class="copy" type="button">Copy</button></div></div></li>
@@ -178,18 +322,186 @@ cephalo watch</pre><button class="copy" type="button">Copy</button></div></div><
 </ol>
 <p class="fineprint"><span id="step-count" aria-live="polite">0 of 6 done</span> · Progress is saved in this browser only. <button class="toggle" id="steps-reset" type="button">Reset</button></p>
 
-    <h3>Undo it any time</h3>
+      <div id="install-os">
+        <h3>Where your files live</h3>
+        <div role="tablist" aria-label="Your shell">
+          <button role="tab" type="button" data-tab="ps" aria-selected="true">PowerShell</button>
+          <button role="tab" type="button" data-tab="sh" aria-selected="false" tabindex="-1">bash / zsh</button>
+        </div>
+      </div>
+      <div data-os="ps"><div class="code" tabindex="0" role="group" aria-label="PowerShell command"><pre>Get-Content "$HOME\.cephalo\rules.yml"</pre><button class="copy" type="button">Copy</button></div></div>
+      <div data-os="sh" hidden><div class="code" tabindex="0" role="group" aria-label="bash or zsh command"><pre>cat ~/.cephalo/rules.yml</pre><button class="copy" type="button">Copy</button></div></div>
+      <p class="muted">That is your rules file. Edit it in your editor.</p>
+      <h3>Undo it any time</h3>
 <div class="code" tabindex="0" role="group" aria-label="Command"><pre>cephalo uninstall claude
 cephalo uninstall hermes
 npm uninstall -g @nomajorconcerns/cephalo</pre><button class="copy" type="button">Copy</button></div>
 <p class="muted">The first two remove only Cephalo's own entries, after taking a backup. The last removes the command. Your rules file stays yours: <code>~/.cephalo/rules.yml</code>.</p>
 
-    <p class="limit"><strong>SideEye is not installable yet.</strong> There is nothing to download. See <a href="#sideeye">what exists</a>.</p>
+    </div>
+    <div data-show="sideeye both" class="zone-sideeye card" style="margin-top:16px" hidden>
+      <h3>SideEye: not installable yet</h3>
+      <p>There is no download, no package and no install command, so there is nothing to uninstall. A Windows installer exists, built locally and unsigned, and is not published. There is no waitlist form, because nothing here collects email.</p>
+      <p><span class="tag tag-planned">Planned</span> Signed Windows, macOS and Linux installers, and staged updates with rollback.</p>
+      <div class="btn-row"><a class="btn btn-primary" href="https://github.com/nomajorconcerns/sideeye">Watch SideEye on GitHub</a><a class="btn" href="https://nomajorconcerns.github.io/sideeye/">SideEye site</a></div>
+    </div>
+    <p class="limit"><strong>Limit:</strong> with both, install Cephalo first. Neither needs the other, and today they share only the read-only log view.</p>
+  </div>
+</section>
+
+<section id="pricing" class="zone-nmc" aria-labelledby="h-price" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Pricing and bundle</p>
+    <h2 id="h-price">Planned prices. Not on sale yet.</h2>
+    <p class="banner">Planned. Prices may change. Not on sale yet. There is no checkout, and nothing checks a licence.</p>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Plans and prices, scrolls sideways on small screens">
+    <table class="tbl">
+      <thead><tr><th scope="col">Plan</th><th scope="col" class="col-ceph">Cephalo</th><th scope="col" class="col-side">SideEye</th><th scope="col">Prevent + detect bundle</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Free</th><td>$0. Free for one developer. Everything in 0.1.1 stays free.</td><td>$0. Which Planned features are included is not decided.</td><td>$0</td></tr>
+        <tr><th scope="row">Pro</th><td>$15 / dev / month. Adds a network egress allowlist, a tamper-evident audit log and a bypass benchmark, launching Nov 10.</td><td>About $12 / dev / month. Baselines, flags and containment are the Planned core.</td><td>About $22 / dev / month</td></tr>
+        <tr><th scope="row">Team</th><td>$25 / dev / month. Pro plus dashboard, shared policy and audit log sync through a shared folder.</td><td>Not set. Not designed yet.</td><td>Not set</td></tr>
+        <tr><th scope="row">Enterprise</th><td>Annual contract. Single sign-on, on-prem and a support SLA are Planned.</td><td>Not set. Not designed yet.</td><td>Not set</td></tr>
+      </tbody>
+    </table></div>
+    <p>Cephalo's early-user code CEPHALOG takes 20% off the first year of Cephalo Pro or Team, working from launch day (Nov 10, 2026), as Cephalo's site describes it. Cephalo's prices here are copied from its site and are also not on sale yet.</p>
+    <h3>Bundle calculator</h3>
+    <div class="demo" id="bundle-calc" data-prices="data/prices.json">
+      <p class="bc-loading pg-loading">Loading the prices…</p>
+      <p class="bc-error" hidden>The price data failed to load. Reload the page to try again.</p>
+      <noscript><p class="noscript-note">The calculator needs JavaScript. Pro: Cephalo $15 plus SideEye about $12 is $27; the Planned bundle is about $22, per developer per month.</p></noscript>
+      <div class="bc-stage" hidden>
+        <p class="sim">Planned prices. Not on sale yet.</p>
+        <label class="field" for="bc-devs"><strong>Developers</strong></label>
+        <input id="bc-devs" type="number" min="1" max="1000" step="1" value="5" inputmode="numeric" aria-describedby="bc-err">
+        <p class="bc-err" id="bc-err" role="status"></p>
+        <fieldset class="pg-controls" style="border:0;padding:0;margin:0 0 10px"><legend>Plan</legend><div class="ch-opts">
+          <label class="radio"><input type="radio" name="bc-plan" value="free"><span>Free</span></label>
+          <label class="radio"><input type="radio" name="bc-plan" value="pro" checked><span>Pro</span></label>
+          <label class="radio"><input type="radio" name="bc-plan" value="team"><span>Team</span></label></div></fieldset>
+        <label class="radio" style="margin-bottom:12px"><input type="checkbox" id="bc-code"><span>Apply CEPHALOG to the Cephalo-only row (first year)</span></label>
+        <div class="bc-out"></div>
+      </div>
+    </div>
+    <p class="limit"><strong>Limit:</strong> plain arithmetic on Planned prices. It is not a quote. No checkout exists, and the code is applied only to Cephalo's own plans.</p>
+  </div>
+</section>
+
+<section id="data" class="zone-nmc" aria-labelledby="h-data" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Data handling, both products</p>
+    <h2 id="h-data">What each one collects, keeps and sends.</h2>
+    <p class="lead">From Cephalo's FAQ and code, and from SideEye's source. SideEye's source is not public yet, so its column is a claim you can't check today.</p>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Data handling, scrolls sideways on small screens">
+    <table class="tbl">
+      <thead><tr><th scope="col">Question</th><th scope="col" class="col-ceph">Cephalo</th><th scope="col" class="col-side">SideEye</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">What is collected</th><td>One line per decision in a local audit log, plus its rules, vault and MCP and tripwire state.</td><td>Reads Cephalo's log read only. Keeps its mode setting and a loopback hand-off file. Reads no prompts and captures no screen: the code has no feature for either.</td></tr>
+        <tr><th scope="row">Where it is stored</th><td>In <code>~/.cephalo</code> on your machine.</td><td>In <code>~/.sideeye</code> and the app's own storage on your machine. Sample data is bundled with the app.</td></tr>
+        <tr><th scope="row">What leaves the machine</th><td>Only: calls to MCP servers you configured (when it scans their tools), the Ollama address you set (if you turn a model role on; all are off by default), and the cost report's use of <code>gh</code>.</td><td>Nothing. No HTTP client is among its dependencies, and its content-security policy allows connections only to itself. Its one socket is on <code>127.0.0.1</code>, in Enforce mode only.</td></tr>
+        <tr><th scope="row">Telemetry</th><td>None in the code.</td><td>None, and no updater.</td></tr>
+        <tr><th scope="row">The websites</th><td>The Cephalo site counts visits with GoatCounter, which sets no cookies.</td><td>This site and the SideEye site set no cookies and run no analytics.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="limit"><strong>Limit:</strong> the SideEye column describes the app as built today, which only shows sample data and reads Cephalo's log. The Planned detection will collect more, and this table will change with it.</p>
+  </div>
+</section>
+
+<section id="limits" class="zone-nmc" aria-labelledby="h-limits" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Honest limits, together</p>
+    <h2 id="h-limits">A seatbelt and a lookout. Not a sandbox.</h2>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Limits together, scrolls sideways on small screens">
+    <table class="tbl">
+      <thead><tr><th scope="col">Area</th><th scope="col">Together they do</th><th scope="col">Together they do not</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Isolation</th><td>Check calls before they run (Cephalo) and, once built, watch behaviour (SideEye).</td><td><strong>Neither is a sandbox.</strong> Real isolation needs another OS user or a container.</td></tr>
+        <tr><th scope="row">Tamper</th><td>Cephalo's rules stop an agent from writing its own config, log and rules.</td><td>Stop anything running as the same user outside the agent's hooks. It can tamper with both. SideEye's tamper protection is Planned.</td></tr>
+        <tr><th scope="row">Coverage</th><td>Catch what a rule names, and (Planned) what looks unusual for that agent.</td><td><strong>Guarantee that every attack is caught.</strong> The table above lists attacks neither covers.</td></tr>
+        <tr><th scope="row">Failure</th><td>Let your agent keep working if Cephalo's hook crashes.</td><td>Fail closed on their own errors. A crashed Cephalo hook lets the call through.</td></tr>
+        <tr><th scope="row">Noise</th><td>(Planned) Learn what is normal for each agent.</td><td>Say anything useful in the first days, or tell new work from new danger. Expect false positives.</td></tr>
+        <tr><th scope="row">Platforms</th><td>Run Cephalo's Windows adapter on a real machine. SideEye's Windows build has been run.</td><td>Prove macOS or Linux on real machines. SideEye has no macOS or Linux build yet.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="security" class="zone-nmc" aria-labelledby="h-sec" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">For security teams</p>
+    <h2 id="h-sec">How the logs relate, and what you can check.</h2>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="For security teams, scrolls sideways on small screens">
+    <table class="tbl">
+      <thead><tr><th scope="col">Topic</th><th scope="col">Today</th><th scope="col">Status</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">How the two logs relate</th><td>Cephalo writes one line per decision to a local audit log. SideEye reads it, read only. SideEye has no log of its own.</td><td><span class="tag tag-built">Built</span></td></tr>
+        <tr><th scope="row">Formats and exports</th><td>Cephalo: a local JSON-lines audit log, a generated HTML dashboard, and log sync through a shared folder. SideEye: none. Its Evidence screen and framework exports are sample data.</td><td><span class="tag tag-built">Cephalo</span> <span class="tag tag-planned">SideEye Planned</span></td></tr>
+        <tr><th scope="row">Integrity</th><td>Cephalo can sign policy bundles (Ed25519) and refuses unsigned or altered ones. Its audit log is a record, not signed proof. A tamper-evident log is listed as launching Nov 10 (Pro). SideEye has no integrity checks yet.</td><td><span class="tag tag-built">Cephalo policy</span> <span class="tag tag-planned">Rest Planned</span></td></tr>
+        <tr><th scope="row">Next to endpoint security</th><td>Neither replaces it. Neither has a kernel sensor or sees processes. They add a view of what an agent asked to do. Keep your endpoint tools.</td><td><span class="tag tag-built">Design</span></td></tr>
+        <tr><th scope="row">Reporting a problem</th><td>Use each repo's security policy, linked in the footer.</td><td><span class="tag tag-built">Built</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="numbers" class="zone-nmc" aria-labelledby="h-num" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Open numbers</p>
+    <h2 id="h-num">Only real numbers.</h2>
+    <p class="lead">Cephalo's are a snapshot of its public <code>stats.json</code>, generated 2026-11-07 02:55 UTC. They are copied here, so they go stale: the live figures are on <a href="https://nomajorconcerns.github.io/cephalo/#stats">Cephalo's site</a>.</p>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Open numbers, scrolls sideways on small screens">
+    <table class="tbl">
+      <thead><tr><th scope="col">Measure</th><th scope="col" class="col-ceph">Cephalo</th><th scope="col" class="col-side">SideEye</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Latest release</th><td>0.1.1 (npm, 2026-11-03)</td><td>None. Not released.</td></tr>
+        <tr><th scope="row">npm downloads, total</th><td>355. Cephalo notes these include mirrors, bots and CI installs.</td><td>Not applicable</td></tr>
+        <tr><th scope="row">GitHub stars</th><td>0</td><td>No public count</td></tr>
+        <tr><th scope="row">Measured on one Windows machine</th><td>Not measured here</td><td>Cold start 129 to 345 ms, idle CPU 0.03%, 118 MB memory with the window open. Console on sample data only; no detection running.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="limit"><strong>Limit:</strong> small numbers from a launch week. SideEye publishes no stats of its own, so none are shown.</p>
+  </div>
+</section>
+
+<section id="roadmap" class="zone-nmc" aria-labelledby="h-road" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Roadmap</p>
+    <h2 id="h-road">Built, in development, Planned.</h2>
+    <div class="road">
+      <div class="card zone-cephalo"><h3>Cephalo</h3>
+        <p><span class="tag tag-built">Built, 0.1.1</span></p><ul><li>Rules for commands and file paths, with an audit log.</li><li>MCP firewall and tool fingerprinting.</li><li>Prompt-injection tripwire, secrets vault, local-model judge (off by default).</li><li>Dashboard, shared policy and signed policy bundles.</li></ul>
+        <p><span class="tag tag-planned">Launching Nov 10</span></p><ul><li>0.2.0: network egress allowlist, tamper-evident audit log, bypass benchmark (Pro) and new free features.</li></ul>
+        <p><span class="tag tag-planned">Planned</span></p><ul><li>Hosted dashboard, single sign-on, on-prem, support SLA.</li></ul></div>
+      <div class="card zone-sideeye"><h3>SideEye</h3>
+        <p><span class="tag tag-built">Built</span></p><ul><li>Console on sample data, tray and pop-ups (Windows tested).</li><li>Read-only view of Cephalo's log.</li></ul>
+        <p><span class="tag tag-planned">In development</span></p><ul><li>Approval pop-up for Cephalo's holds (Claude Code, Enforce mode).</li></ul>
+        <p><span class="tag tag-planned">Planned</span></p><ul><li>Baselines, flags, enforced containment, signed installers, macOS and Linux builds, tamper protection.</li></ul></div>
+      <div class="card zone-nmc"><h3>Between them</h3>
+        <p><span class="tag tag-built">Built</span></p><ul><li>SideEye reads Cephalo's log.</li></ul>
+        <p><span class="tag tag-planned">In development</span></p><ul><li>SideEye answers Cephalo's ask. Not in a Cephalo release yet.</li></ul>
+        <p><span class="tag tag-planned">Planned</span></p><ul><li>Baselines from the log, decisions that become rules, shared alerts.</li></ul></div>
+    </div>
+    <p class="limit"><strong>Limit:</strong> no dates except the Nov 10 launch Cephalo has announced. Planned means not built.</p>
+  </div>
+</section>
+
+<section id="faq" class="zone-nmc" aria-labelledby="h-faq" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap" style="max-width:860px">
+    <p class="eyebrow">FAQ</p>
+    <h2 id="h-faq">Short answers.</h2>
+    <div class="faqs">
+<details class="faq"><summary>Do I need both?</summary><div class="ans"><p>No. Cephalo is released and works alone. SideEye is not installable yet. If you know what you want blocked, Cephalo is enough to start. Use the <a href="#choose">chooser</a> if you are unsure.</p></div></details>
+<details class="faq"><summary>Does SideEye require Cephalo, or the other way round?</summary><div class="ans"><p>No, neither requires the other. Today SideEye reads Cephalo's log, and the approval hand-off is in development. If SideEye is closed or in Audit mode, Cephalo behaves exactly as it did before.</p></div></details>
+<details class="faq"><summary>Do they slow my agent down?</summary><div class="ans"><p>Cephalo runs as a hook before each call. Its optional local-model judge takes about 3 seconds on a CPU, per its site, and is off by default. SideEye is not in the action path today, so it adds nothing to a call; in Enforce mode a held action waits for you, up to 40 seconds. SideEye's target of under 5 ms per action could not be measured, because it is not in that path.</p></div></details>
+<details class="faq"><summary>Does anything leave my machine?</summary><div class="ans"><p>Not from SideEye. Cephalo makes network calls only to MCP servers you configured, to an Ollama address you set if you turn a model role on, and through <code>gh</code> for its cost report. Neither has telemetry. See the <a href="#data">data table</a>.</p></div></details>
+<details class="faq"><summary>What happens if one crashes?</summary><div class="ans"><p>If Cephalo's hook crashes or gets invalid input, the call is allowed and the error is logged, so a broken guard never freezes your agent. That means a crash lets a call through. If SideEye crashes or is closed, Cephalo behaves as before. If SideEye is open in Enforce mode and does not answer a hold, the action is blocked after 40 seconds.</p></div></details>
+<details class="faq"><summary>Can an agent turn them off?</summary><div class="ans"><p>Cephalo has rules that stop agents from writing the Claude Code or Hermes config, its own rules file, audit log and vault files. They are rules, not a sandbox: you, or anything running outside the hooks, can still edit those files. SideEye has no such protection yet; tamper protection is Planned.</p></div></details>
+<details class="faq"><summary>Does a Cephalo block hold with --dangerously-skip-permissions?</summary><div class="ans"><p>For Claude Code, per its documentation, yes: a hook that returns a deny blocks the call even then. Cephalo's author has not confirmed it for Hermes.</p></div></details>
+    </div>
   </div>
 </section>
 
 </main>
-
 <footer class="zone-nmc">
   <div class="wrap">
     <div class="cols">
@@ -210,9 +522,9 @@ npm uninstall -g @nomajorconcerns/cephalo</pre><button class="copy" type="button
       </div>
       <div>
         <h2>SideEye</h2>
-        <ul><li><a href="https://nomajorconcerns.github.io/sideeye/">SideEye site</a></li></ul>
+        <ul><li><a href="https://nomajorconcerns.github.io/sideeye/">SideEye site</a></li><li><a href="https://github.com/nomajorconcerns/sideeye">GitHub</a></li><li><a href="https://github.com/nomajorconcerns/sideeye/issues">Issues</a></li><li><a href="https://github.com/nomajorconcerns/sideeye/blob/main/SECURITY.md">Security policy</a></li></ul>
         <h2 style="margin-top:1.4em">This site</h2>
-        <ul><li><a href="privacy.html">Privacy</a></li><li><a href="agents.md">agents.md</a></li></ul>
+        <ul><li><a href="privacy.html">Privacy</a></li><li><a href="agents.md">agents.md</a></li><li><a href="https://nomajorconcerns.github.io/cephalo/contact.html">Contact</a></li></ul>
       </div>
     </div>
     <p style="margin-top:28px">No cookies, no analytics, no third-party requests. Fonts are served from this site. Everything on this page runs in your browser.</p>
