@@ -78,7 +78,7 @@ section{padding:clamp(40px,7vw,88px) 0}
 /* Product cards */
 .steps>*,.layers>*,.products>*,.hero>*,.cols>*,.states>*{min-width:0}
 .products{display:grid;gap:20px;grid-template-columns:1fr}
-@media(min-width:900px){.products{grid-template-columns:1.55fr 1fr;align-items:start}}
+@media(min-width:900px){.products{grid-template-columns:1fr 1fr;align-items:stretch}}
 .product h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .product .tagline{font-family:var(--font-head);font-size:1.15rem;color:var(--z-ink);margin-bottom:.6em}
 .product.big{padding:clamp(22px,4vw,36px)}

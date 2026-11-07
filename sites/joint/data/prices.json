@@ -1,0 +1,18 @@
+{
+ "note": "Cephalo prices are copied from Cephalo's site (Free $0, Pro $15, Team $25 per dev per month). SideEye Pro and the bundle are the Planned intended prices; null means not set.",
+ "cephalo": {
+  "free": 0,
+  "pro": 15,
+  "team": 25
+ },
+ "sideeye": {
+  "free": 0,
+  "pro": 12,
+  "team": null
+ },
+ "bundle": {
+  "free": 0,
+  "pro": 22,
+  "team": null
+ }
+}
