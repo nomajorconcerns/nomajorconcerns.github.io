@@ -23,7 +23,7 @@ export const textPairs = [
 ];
 export const extraPairs = {
   cephalo: [["allow", "surface"], ["block", "surface"], ["allow", "bg"], ["block", "bg"]],
-  sideeye: [["gold", "bg"], ["gold", "surface"]],
+  sideeye: [["gold", "bg"], ["gold", "surface"], ["accent-ink", "gold"]],
 };
 
 const vars = (obj, prefix = "") => Object.entries(obj).map(([k, v]) => `--${prefix}${k}:${v};`).join("");

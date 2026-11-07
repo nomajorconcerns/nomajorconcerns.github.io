@@ -1,1 +1,1 @@
-{"name":"nmc-sites","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","check":"node scripts/check.mjs"},"devDependencies":{"axe-core":"^4.14.0","playwright-core":"^1.65.0","sharp":"^0.35.5"}}
+{"name":"nmc-sites","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","check":"node scripts/check.mjs"},"devDependencies":{"axe-core":"^4.14.0","chrome-launcher":"^1.2.3","lighthouse":"^13.6.0","playwright-core":"^1.65.0","sharp":"^0.35.5"}}
