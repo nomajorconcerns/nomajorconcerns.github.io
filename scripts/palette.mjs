@@ -52,3 +52,11 @@ ${dark}}
 ${zoneClasses}
 `;
 }
+
+// Text in one product's colour that appears on the neutral (nmc) or another zone's surface (demo logs, table headers).
+export const crossPairs = [
+  ["cephalo", "accent", "nmc", "surface"], ["cephalo", "block", "nmc", "surface"], ["sideeye", "accent", "nmc", "surface"], ["sideeye", "gold", "nmc", "surface"],
+  ["cephalo", "accent", "nmc", "bg"], ["sideeye", "accent", "nmc", "bg"], ["cephalo", "accent", "sideeye", "surface"], ["sideeye", "accent", "cephalo", "surface"], ["sideeye", "gold", "cephalo", "surface"],
+  ["cephalo", "block", "nmc", "bg"], ["sideeye", "gold", "nmc", "bg"],
+  ["sideeye", "accent-ink", "sideeye", "gold"],
+];
