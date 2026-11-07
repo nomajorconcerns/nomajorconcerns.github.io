@@ -68,8 +68,10 @@ for (const site of ["joint", "sideeye"].filter((x) => !only || x === only)) {
   mkdir(out);
   // CSS: tokens + components in one file, no minifier needed at this size
   mkdir(path.join(out, "css"));
-  fs.writeFileSync(path.join(out, "css/site.css"), tokensCss() + read("shared/css/components.css") + (exists(`sites/${site}/site.css`) ? read(`sites/${site}/site.css`) : ""));
-  mkdir(path.join(out, "js")); fs.copyFileSync(path.join(root, "shared/js/ui.js"), path.join(out, "js/ui.js"));
+  fs.writeFileSync(path.join(out, "css/site.css"), tokensCss() + read("shared/css/components.css") + read("shared/css/demo.css") + (exists(`sites/${site}/site.css`) ? read(`sites/${site}/site.css`) : ""));
+  copyDir(path.join(root, "shared/js"), path.join(out, "js"));
+  if (exists(`sites/${site}/js`)) copyDir(path.join(root, "sites", site, "js"), path.join(out, "js"));
+  if (exists(`sites/${site}/data`)) copyDir(path.join(root, "sites", site, "data"), path.join(out, "data"));
   copyDir(path.join(root, "shared/fonts"), path.join(out, "fonts"));
   // pages
   for (const f of fs.readdirSync(path.join(root, "sites", site))) {
