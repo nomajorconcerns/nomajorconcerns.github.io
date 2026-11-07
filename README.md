@@ -2,8 +2,8 @@
 
 Source for the joint site (Cephalo + SideEye) and the SideEye site.
 
-- Joint site: https://nomajorconcerns.github.io/ (served from `docs/`)
-- SideEye site: https://nomajorconcerns.github.io/sideeye/ (built here, published from the `sideeye` repo's `docs/`)
+- Joint site: https://nomajorconcerns.github.io/ (built output lives on the `gh-pages` branch; `main` keeps source only)
+- SideEye site: https://nomajorconcerns.github.io/sideeye/ (built here, built here; its built copy is in the `sideeye` repo)
 - Cephalo: https://nomajorconcerns.github.io/cephalo/ (separate repo, not touched here)
 
 ## Build
