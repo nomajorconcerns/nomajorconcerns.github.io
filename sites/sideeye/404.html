@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" data-ns="se"><head>
+<title>Not found &middot; SideEye</title><meta name="robots" content="noindex">
+<base href="{{cfg:base}}">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+{{include:early-theme}}
+<link rel="stylesheet" href="css/site.css">
+<script src="js/ui.js" defer></script>
+</head><body>
+<header class="topbar zone-nmc"><div class="wrap"><a class="brand" href="./">{{include:logo-mark}} SideEye</a><nav class="topnav" aria-label="Main"></nav>{{include:controls}}</div></header>
+<main class="zone-sideeye" style="padding:clamp(32px,8vw,96px) 0"><div class="wrap" style="text-align:center;max-width:560px">
+{{chameleon:inline:flagged}}
+<h1 style="margin-top:20px">Nothing to see here. Suspicious.</h1>
+<p class="lead" style="margin-inline:auto">That page does not exist. The eye swivelled anyway.</p>
+<div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="./">Back to the start</a></div>
+</div></main></body></html>

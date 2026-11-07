@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 230">
+<path d="M10 196 C90 188 200 192 292 184" fill="none" stroke="#5a4636" stroke-width="8" stroke-linecap="round"/>
+<path d="M72 160 C44 162 30 180 38 196 C46 210 70 208 74 194 C77 184 68 178 61 182 C56 185 58 192 64 191" fill="none" stroke="#7aa82e" stroke-width="10" stroke-linecap="round"/>
+<path d="M98 168 L88 190 M88 190 L80 192 M88 190 L94 194" stroke="#5f8a22" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path d="M66 160 C76 122 120 104 168 110 C200 114 214 134 204 152 C186 176 110 182 66 160 Z" fill="#8fc23a"/>
+<path d="M76 150 C110 142 150 140 196 146" fill="none" stroke="#77a82c" stroke-width="5" stroke-linecap="round"/>
+<path d="M86 132 C114 124 150 122 186 128" fill="none" stroke="#77a82c" stroke-width="4" stroke-linecap="round"/>
+<path d="M82 164 C112 174 160 174 198 160" fill="none" stroke="#c9e57a" stroke-width="5" stroke-linecap="round"/>
+<path d="M80 134 L86 124 L92 128 L95 117 L101 119 L109 109 L115 115 L124 106 L130 112 L139 104 L145 110 L154 103 L160 109 L169 104 L174 111" fill="none" stroke="#6a9a24" stroke-width="3" stroke-linejoin="round"/>
+<path d="M176 168 L184 190 M184 190 L176 194 M184 190 L192 193" stroke="#5f8a22" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path d="M178 120 C186 96 214 84 240 96 C262 106 270 128 258 142 C244 156 210 156 192 146 C184 140 180 132 178 120 Z" fill="#8fc23a"/>
+<path d="M184 112 C188 86 206 70 226 66 C230 74 236 84 240 96" fill="#7aa82e"/>
+<path d="M244 140 L256 137" stroke="#4d6e1a" stroke-width="2.5" stroke-linecap="round"/>
+<g fill="#e3b23c" stroke="#a87c17" stroke-width="2" stroke-linejoin="round"><path d="M122 24 Q93.6 11.1 58 22 Q92.8 35.1 122 24 Z"/><path d="M140 31 Q105.3 21.1 68 42 Q109.9 50.8 140 31 Z"/><path d="M160 40 Q121.4 34.5 84 62 Q130.2 65.3 160 40 Z"/><path d="M178 50 Q138.0 48.8 104 82 Q151.4 80.0 178 50 Z"/><path d="M194 62 Q155.8 64.4 128 100 Q172.8 93.8 194 62 Z"/><path d="M206 76 Q174.2 79.2 156 112 Q192.8 105.2 206 76 Z"/><path d="M216 90 C198 52 160 26 112 18 C120 32 150 48 176 64 C194 74 206 84 210 94 Z" fill="#f0c656"/></g>
+<circle cx="230" cy="114" r="16" fill="#a9d24c" stroke="#5f8a22" stroke-width="2.5"/>
+<circle cx="230" cy="114" r="10" fill="none" stroke="#7aa82e" stroke-width="2.5"/>
+<circle cx="221" cy="113" r="5" fill="#0e1410"/>
+<circle cx="219.6" cy="111.6" r="1.4" fill="#ffffff"/>
+</svg>

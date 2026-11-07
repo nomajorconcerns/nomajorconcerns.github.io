@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" data-ns="nmc">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>No Major Concerns: Cephalo and SideEye, for people who let AI agents work on their machine</title>
+<meta name="description" content="Two local tools for AI coding agents. Cephalo blocks dangerous tool calls before they run and is released. SideEye is in development: a console that reads Cephalo's log today, with behaviour detection and containment still Planned.">
+<link rel="canonical" href="{{cfg:siteUrl}}">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="No Major Concerns">
+<meta property="og:title" content="Cephalo stops the tool call before it runs. SideEye notices what slipped through.">
+<meta property="og:description" content="Two open, local tools for people who let AI agents work on their machine. Cephalo is released. SideEye is in development.">
+<meta property="og:url" content="{{cfg:siteUrl}}">
+<meta property="og:image" content="{{cfg:siteUrl}}og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A chameleon on a branch above the water and an octopus below it, both with flat expressions, next to the headline.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cephalo stops the tool call before it runs. SideEye notices what slipped through.">
+<meta name="twitter:image" content="{{cfg:siteUrl}}og.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+{{include:early-theme}}
+<link rel="stylesheet" href="css/site.css">
+<script src="js/ui.js" defer></script>
+</head>
+<body>
+{{sprite}}
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar zone-nmc">
+  <div class="wrap">
+    <a class="brand" href="./">No Major Concerns</a>
+    <nav class="topnav" aria-label="Main">
+      <a href="#layers">Two layers</a>
+      <a href="#products">Cephalo and SideEye</a>
+      <a href="#install">Install Cephalo</a>
+    </nav>
+    {{include:controls}}
+  </div>
+</header>
+
+<main id="main">
+
+<section class="zone-nmc" aria-labelledby="h-hero" style="padding-top:clamp(32px,6vw,72px)">
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">For people who let AI agents work on their machine</p>
+      <h1 id="h-hero">Cephalo stops the tool call before it runs. SideEye notices what slipped through.</h1>
+      <p class="lead">Two open, local tools for people who let AI agents work on their machine.</p>
+      <p class="status"><strong>Status today.</strong> Cephalo 0.1.1 is released and installable (0.2.0 launches Nov 10). SideEye is in development: its console runs on sample data and can read Cephalo's log, and its behaviour detection and containment are <strong>Planned</strong>, not built. <a href="#sideeye">See what exists</a>.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#install">Install Cephalo</a>
+        <a class="btn" href="#layers">Why two layers ↓</a>
+      </div>
+    </div>
+    <div class="hero-art">{{scene:normal}}</div>
+  </div>
+</section>
+
+<section id="products" class="zone-nmc" aria-labelledby="h-products" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Two tools, one job each</p>
+    <h2 id="h-products">Prevent with Cephalo. Detect and respond with SideEye.</h2>
+    <p class="lead" style="margin-bottom:28px">Cephalo is the seatbelt. SideEye is meant to be the one watching the road. Neither needs the other.</p>
+    <div class="products">
+
+      <article id="cephalo" class="card product big zone-cephalo" aria-labelledby="h-cephalo">
+        <p class="eyebrow"><span class="tag tag-built">Prevent</span><span class="tag tag-built">Released</span></p>
+        <h3 id="h-cephalo">Cephalo</h3>
+        <p class="tagline">The seatbelt for AI coding agents.</p>
+        <p>Checks every shell command, file access and MCP tool call from your agent against rules you own, and refuses the dangerous ones before they run.</p>
+        <p class="verdict" tabindex="0" role="img" aria-label="Example output: blocked claude Bash by rule no-drop: psql -c DROP TABLE users"><span class="v-block">✕ BLOCK</span> claude/Bash [no-drop] psql -c "DR&#79;P TABLE users;"</p>
+        <ul class="facts" style="margin-top:1em">
+          <li>Hooks into <strong>Claude Code</strong> and <strong>Hermes Agent</strong>. Codex and Cursor adapters are tested against the vendors' documented formats, not run inside the real apps.</li>
+          <li>A Node.js command-line tool for Windows, macOS and Linux. Rules are plain YAML you own.</li>
+          <li>Runs on your machine. No telemetry in the code; the audit log stays in <code>~/.cephalo</code>.</li>
+          <li>Open source, MIT licence. Version 0.1.1 is released and stays free; 0.2.0 launches Nov 10, 2026.</li>
+        </ul>
+        <p class="limit"><strong>Limit:</strong> it matches text patterns. A command assembled at run time, or hidden inside a script file, can slip past.</p>
+        <div class="btn-row"><a class="btn btn-primary" href="{{cfg:cephaloUrl}}">Cephalo site →</a><a class="btn" href="{{cfg:cephaloRepo}}">GitHub</a></div>
+      </article>
+
+      <article id="sideeye" class="card product small zone-sideeye" aria-labelledby="h-sideeye">
+        <p class="eyebrow"><span class="tag tag-planned">Detect &amp; respond</span><span class="tag tag-planned">In development</span></p>
+        <h3 id="h-sideeye">SideEye</h3>
+        <p class="tagline">Every agent gets the side-eye.</p>
+        <p>Agent detection and response for AI agents. The goal: learn what is normal for each agent on your computer, flag what is not, and contain it.</p>
+        <ul class="facts">
+          <li><span class="tag tag-built">Built</span> Desktop console (Windows build tested). Every number in it is sample data.</li>
+          <li><span class="tag tag-built">Built</span> A read-only, live view of Cephalo's audit log on the same machine.</li>
+          <li><span class="tag tag-planned">In development</span> An approval pop-up for actions Cephalo holds (Claude Code only). It needs a Cephalo change that has not shipped.</li>
+          <li><span class="tag tag-planned">Planned</span> Per-agent baselines, anomaly flags and containment.</li>
+        </ul>
+        <p class="limit"><strong>Limit:</strong> today it detects nothing on its own. Detection is not prevention, and baselines need a warm-up period before they mean anything.</p>
+        <div class="btn-row"><a class="btn" href="{{cfg:sideeyeUrl}}">SideEye site →</a></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="layers" class="zone-nmc" aria-labelledby="h-layers" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap" style="max-width:860px">
+    <p class="eyebrow">Why two layers</p>
+    <h2 id="h-layers">Rules stop what you predicted. Behaviour catches what you didn't.</h2>
+    <p>Cephalo checks each tool call against rules you wrote and blocks the ones that match, before they run. That works for the things you thought of. It does not understand what a script does once it runs, and a rule can only match what you imagined.</p>
+    <p>SideEye is meant to cover the rest: learn what each agent normally does, and notice when one stops acting like itself, even with commands no rule blocks. <strong>That layer is Planned. It is not built.</strong></p>
+
+    <ol class="layers" aria-label="Order of events for one agent action">
+      <li class="zone-nmc"><span class="who neutral">Agent</span><span>asks to run a tool call</span></li>
+      <li class="l-cephalo"><span class="who cephalo">Cephalo · before</span><span><strong>ALLOW</strong> or <strong>BLOCK</strong> against your rules, before the call runs. <span class="tag tag-built">Released</span></span></li>
+      <li class="zone-nmc"><span class="who neutral">The tool</span><span>runs, if it was allowed</span></li>
+      <li class="l-sideeye"><span class="who sideeye">SideEye · after</span><span>Compare what the agent did with what is normal for it. <span class="tag tag-planned">Planned</span></span></li>
+      <li class="l-sideeye"><span class="who sideeye">SideEye · respond</span><span><strong>FLAG</strong>, then contain the agent. <span class="tag tag-planned">Planned</span></span></li>
+    </ol>
+    <p class="muted"><strong>Neither requires the other.</strong> Today they share one thing: SideEye can read Cephalo's log. Neither is a sandbox, and anything running as you outside the agent's hooks can change both.</p>
+
+    <figure class="stat" style="margin:28px 0 0">
+      <div class="big-num">~1 : 7</div>
+      <p style="margin:.6em 0 .4em">In one company's agents, over one month, the agents' own logs recorded about <strong>1 tool call for every 7 processes</strong> the kernel saw (one software company, 300+ employee devices, one month; no actions were blocked during collection).</p>
+      <p class="muted" style="margin:0 0 .6em">What it means here: an agent's account of its own actions is not the whole picture, which is a reason to look from more than one place. It does not mean Cephalo or SideEye sees kernel-level processes. Neither does.</p>
+      <cite>Source: Sysdig, <a href="https://www.sysdig.com/reports/ai-agents-first-look">“A First Look: Under the Hood of AI Agents”</a>. A vendor study of a single organisation.</cite>
+    </figure>
+  </div>
+</section>
+
+<section id="install" class="zone-cephalo" aria-labelledby="h-install" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap" style="max-width:860px">
+    <p class="eyebrow">Install</p>
+    <h2 id="h-install">Install Cephalo. Six steps, about five minutes.</h2>
+    <p class="muted">Cephalo is installed from npm. Tick steps off as you go; your progress stays in this browser. These are the same steps as on the <a href="{{cfg:cephaloUrl}}#install">Cephalo site</a>, which has the details.</p>
+    <noscript><p class="noscript-note">Ticking steps off needs JavaScript. The steps below still work without it.</p></noscript>
+    {{include:install-steps}}
+    {{include:uninstall}}
+    <p class="limit"><strong>SideEye is not installable yet.</strong> There is nothing to download. See <a href="#sideeye">what exists</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="zone-nmc">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h2>No Major Concerns</h2>
+        <p><span data-deco>No major concerns. Until there are.</span></p>
+        <p>I built Cephalo to block what I could predict. SideEye is for what I couldn't.</p>
+      </div>
+      <div>
+        <h2>Cephalo</h2>
+        <ul>
+          <li><a href="{{cfg:cephaloUrl}}">Cephalo site</a></li>
+          <li><a href="{{cfg:cephaloRepo}}">GitHub</a></li>
+          <li><a href="{{cfg:cephaloRepo}}/issues">Issues</a></li>
+          <li><a href="{{cfg:cephaloRepo}}/blob/master/SECURITY.md">Security policy</a></li>
+          <li><a href="https://www.npmjs.com/package/@nomajorconcerns/cephalo">npm</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>SideEye</h2>
+        <ul><li><a href="{{cfg:sideeyeUrl}}">SideEye site</a></li></ul>
+        <h2 style="margin-top:1.4em">This site</h2>
+        <ul><li><a href="privacy.html">Privacy</a></li><li><a href="agents.md">agents.md</a></li></ul>
+      </div>
+    </div>
+    <p style="margin-top:28px">No cookies, no analytics, no third-party requests. Fonts are served from this site. Everything on this page runs in your browser.</p>
+  </div>
+</footer>
+</body>
+</html>
