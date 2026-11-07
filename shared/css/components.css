@@ -116,7 +116,7 @@ section{padding:clamp(40px,7vw,88px) 0}
 .ch-feathers{fill:var(--ch-gold);stroke:var(--ch-gold-line);stroke-width:2;stroke-linejoin:round} .ch-feather-top{fill:var(--ch-gold-top)}
 .ch-crest{transform-origin:200px 120px;transform:rotate(var(--crest-rot));transition:transform var(--dur) ease-out}
 .ch-eye-ring{fill:var(--ch-eye);stroke:var(--ch-ring);stroke-width:2.5} .ch-eye-ring2{fill:none;stroke:var(--ch-ring2);stroke-width:2.5}
-.ch-pupil{transform:translateX(var(--pupil-dx));transition:transform var(--dur) ease-out}
+.ch-pupil{transform:translate(var(--pupil-dx),var(--pupil-dy,0px));transition:transform var(--pupil-ms,var(--dur)) ease-out}
 .ch-pupil-dot{fill:var(--ch-pupil)} .ch-pupil-hi{fill:#fff}
 .ch-lid{fill:var(--ch-body);opacity:var(--lid);transition:opacity var(--dur)}
 /* States: colour AND shape change, and every state also has a text label elsewhere on the page */
@@ -150,3 +150,20 @@ footer li{padding:3px 0}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 :root[data-motion=reduce] *,:root[data-motion=reduce] *::before,:root[data-motion=reduce] *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 .noscript-note{background:var(--nmc-surface);border:1px solid var(--nmc-line);padding:8px 12px;border-radius:8px;font-size:.9rem}
+
+/* Pricing cards (shared) */
+.plans{display:grid;gap:16px;grid-template-columns:1fr;margin:1.2em 0}
+@media(min-width:760px){.plans{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.plans{grid-template-columns:repeat(4,1fr)}}
+.plans>*{min-width:0}
+.plan{display:flex;flex-direction:column}
+.plan h3{margin-bottom:.2em}
+.plan .price{font:600 1.7rem/1.1 var(--font-head);margin:.2em 0 .1em;color:var(--z-ink)}
+.plan .price small{font:400 .9rem var(--font-body);color:var(--z-muted)}
+.plan .for{color:var(--z-muted);font-size:.95rem;min-height:3.2em}
+.plan ul{padding-left:1.1em;margin:.6em 0;flex:1}
+.plan .tag{align-self:flex-start;margin:.6em 0 0}
+.banner{border:1px dashed var(--z-line);border-radius:10px;padding:10px 14px;background:var(--z-surface);color:var(--z-ink);font-weight:600}
+.stats{display:grid;gap:16px}@media(min-width:900px){.stats{grid-template-columns:1fr 1fr}}.stats>*{min-width:0}
+.stat{max-width:none;color:var(--nmc-ink)}
+.stat{background:var(--z-surface);border-color:var(--z-line);color:var(--z-ink)}.stat .big-num{color:var(--z-ink)}.stat cite,.stat .muted{color:var(--z-muted)}

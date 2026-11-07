@@ -84,3 +84,33 @@ table.tbl{border-collapse:collapse;width:100%;min-width:620px;background:var(--z
 .tbl tbody th{font-weight:600}
 .tbl code{overflow-wrap:anywhere}
 .cols2{display:grid;gap:20px}@media(min-width:900px){.cols2{grid-template-columns:1fr 1fr}}.cols2>*{min-width:0}
+
+/* attack replays */
+.rp-pick{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+.rp-blurb{margin:.4em 0 1em;color:var(--z-muted)}
+.rp-scrub{display:grid;gap:8px;margin-bottom:14px}
+.rp-scrub input[type=range]{width:100%;accent-color:var(--z-fill);min-height:32px}
+.rp-cols{display:grid;gap:16px}
+@media(min-width:900px){.rp-cols{grid-template-columns:1fr 1fr}}
+.rp-cols>*{min-width:0}
+.rp-cols section{border:1px solid var(--z-line);border-radius:12px;padding:12px 14px;background:var(--z-bg)}
+.rp-cols h3{font:600 .8rem/1.2 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--z-muted);margin:0 0 6px}
+.rp-log,.rp-saw{list-style:none;margin:0;padding:0;font-size:.92rem}
+.rp-log li,.rp-saw li{display:grid;gap:4px 10px;padding:6px 0;border-top:1px solid var(--z-line);align-items:baseline}
+.rp-log li{grid-template-columns:auto 1fr}.rp-saw li{grid-template-columns:auto auto 1fr}
+.rp-log li:first-child,.rp-saw li:first-child{border-top:0}
+.rp-log .t,.rp-saw .t{color:var(--z-muted);font-size:.8rem}
+.rp-log .what,.rp-saw .what{display:flex;flex-direction:column;overflow-wrap:anywhere;min-width:0}
+.rp-saw .why{color:var(--z-muted)}
+.rp-saw .mark{display:inline-flex;align-items:center;gap:5px;font:600 .68rem/1 var(--font-body);letter-spacing:.07em;min-width:16px}
+.rp-saw .mark svg{width:13px;height:13px}
+.rp-saw li[data-kind=flagged] .mark{color:var(--z-gold)}
+.rp-saw .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--z-line);border:1px solid var(--z-muted)}
+.rp-log li.prevented,.rp-saw li.prevented{opacity:.7;font-style:italic}
+.rp-saw li.prevented .mark{color:var(--z-accent)}
+.rp-actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.rp-actions .btn,.rp-scrub .btn{padding:9px 14px;min-height:40px;font-size:.9rem}
+.rp-outcome{border:1px solid var(--z-line);border-left:4px solid var(--z-accent);border-radius:10px;padding:10px 14px;background:var(--z-bg)}
+.rp-outcome p{margin:.3em 0}
+.rp-outcome .mark-line{display:flex;gap:8px;align-items:center;color:var(--z-accent)}
+.rp-outcome .mark-line svg{width:16px;height:16px}

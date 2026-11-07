@@ -9,7 +9,7 @@ for (const theme of ["dark", "light"]) {
   console.log(theme, "streamed 20s; samples with a lane outside its band:", outside, "of", n * 3);
   await p.getByRole("button", { name: "Spawn 40 processes" }).click();
   await p.evaluate(axeSrc);
-  for (const [label, sel] of [["flagged playground", "#try"], ["baseline", "#baseline"], ["data+limits", "#data"], ["how", "#how"]]) {
+  for (const [label, sel] of [["why", "#why"], ["how", "#how"], ["flagged playground", "#try"], ["replays", "#replays"], ["baseline", "#baseline"], ["ladder", "#ladder"], ["cephalo", "#cephalo"], ["data", "#data"], ["limits", "#limits"], ["security", "#security"], ["numbers", "#numbers"], ["pricing", "#pricing"], ["install", "#install"]]) {
     const r = await p.evaluate((sel) => axe.run(document.querySelector(sel), { runOnly: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa", "best-practice"] }), sel);
     console.log(theme, label, "axe violations:", r.violations.map((v) => v.id + "(" + v.nodes.length + ")").join(",") || 0);
   }

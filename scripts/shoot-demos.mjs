@@ -11,6 +11,9 @@ for (const theme of ["dark", "light"]) for (const [n, w] of [["desktop", 1280], 
   await p.locator("#try").screenshot({ path: `shots/demos/${n}-${theme}-try.png` });
   await p.evaluate(() => { const s = document.querySelector("#bl-days"); s.value = 25; s.dispatchEvent(new Event("input", { bubbles: true })); });
   await p.locator("#baseline").screenshot({ path: `shots/demos/${n}-${theme}-baseline.png` });
+  for (const id of ["why","ladder","security","numbers","pricing"]) await p.locator("#"+id).screenshot({ path: `shots/demos/${n}-${theme}-${id}.png` });
+  await p.locator("#replays-demo").scrollIntoViewIfNeeded(); await p.evaluate(() => { const s = document.querySelector("#rp-step"); s.value = 5; s.dispatchEvent(new Event("input", { bubbles: true })); }); await p.click(".rp-contain"); await p.evaluate(() => { const s = document.querySelector("#rp-step"); s.value = 6; s.dispatchEvent(new Event("input", { bubbles: true })); });
+  await p.locator("#replays").screenshot({ path: `shots/demos/${n}-${theme}-replays.png` });
   await p.locator("#how").screenshot({ path: `shots/demos/${n}-${theme}-how.png` });
   await ctx.close();
 }

@@ -83,5 +83,55 @@ async function open(opts = {}) {
   check("off-screen demo does not run", a === (await page.locator("#playground .feed").first().innerText()));
   await ctx.close();
 }
+
+{ // replays, eye tracking, Just the facts, pricing
+  const { ctx, page, errors } = await open();
+  await page.locator("#replays-demo").scrollIntoViewIfNeeded(); await page.waitForSelector("#replays-demo .rp-stage:not([hidden])");
+  const setStep = (n) => page.evaluate((n) => { const s = document.querySelector("#rp-step"); s.value = n; s.dispatchEvent(new Event("input", { bubbles: true })); }, n);
+  await setStep(6);
+  check("replay: log and SideEye columns differ", (await page.locator(".rp-saw li[data-kind=flagged]").count()) === 3 && /Task complete/.test(await page.locator(".rp-log").innerText()));
+  await setStep(3); await page.click(".rp-contain");
+  check("replay: contain at step 4 prevents the send", /Prevented the upload/.test(await page.locator(".rp-outcome").innerText()), (await page.locator(".rp-outcome").innerText()).slice(0, 80));
+  await setStep(5);
+  check("replay: later steps marked PREVENTED", (await page.locator(".rp-saw li.prevented").count()) === 2 && /PREVENTED/.test(await page.locator(".rp-saw").innerText()));
+  await page.click(".rp-reset"); await setStep(5); await page.click(".rp-contain");
+  check("replay: contain after the send says data already left", /already uploaded/.test(await page.locator(".rp-outcome").innerText()));
+  await page.click(".rp-reset"); await page.click(".rp-contain");
+  check("replay: contain at step 1 admits nothing was prevented", /Nothing was prevented/.test(await page.locator(".rp-outcome").innerText()));
+  await page.check("#rp-sc-leave"); await setStep(5);
+  check("replay 2: summary mismatch shown", /summary lists 0 changes/.test(await page.locator(".rp-saw").innerText()));
+  // eye tracking
+  await page.evaluate(() => scrollTo(0, 0));
+  const dx = () => page.evaluate(() => parseFloat(document.getElementById("chameleon").style.getPropertyValue("--pupil-dx")) || 0);
+  await page.mouse.move(5, 400); await page.waitForTimeout(150); const left = await dx();
+  await page.mouse.move(1270, 400); await page.waitForTimeout(150); const right = await dx();
+  check("eye follows cursor (left then right)", left < -1 && right > 1, `${left.toFixed(1)} / ${right.toFixed(1)}`);
+  // Just the facts hides mascots
+  const vis = () => page.evaluate(() => [...document.querySelectorAll(".mascot")].filter((e) => e.getBoundingClientRect().width > 0 && getComputedStyle(e).display !== "none").length);
+  const before = await vis(); await page.click("#toggle-facts"); const after = await vis();
+  check("Just the facts hides every mascot", before > 0 && after === 0, `${before} -> ${after}`);
+  check("Just the facts setting is saved", (await page.evaluate(() => localStorage.getItem("se.facts"))) === "on");
+  await page.reload(); check("Just the facts persists across reload", (await vis()) === 0);
+  // pricing honesty
+  const body = await page.locator("main").innerText();
+  check("pricing carries the Planned / not on sale label", /Planned\. Prices may change\. Not on sale yet\./.test(body));
+  check("no checkout or payment form", (await page.locator("form, input[autocomplete^=cc-], input[name*=card]").count()) === 0);
+  check("noindex still present", (await page.locator('meta[name=robots][content=noindex]').count()) === 1);
+  check("no console errors (replays/eye)", errors.length === 0, errors.join(" | "));
+  await ctx.close();
+}
+{ // idle side-eye after 20 s, and none under reduced motion
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const page = await ctx.newPage();
+  await page.clock.install(); await page.goto(URL); await page.waitForSelector("#chameleon");
+  await page.clock.fastForward(21000);
+  check("idle 20 s: chameleon gives the side-eye", (await page.evaluate(() => document.getElementById("chameleon").dataset.idle)) === "true");
+  await page.mouse.move(300, 300);
+  check("activity ends the side-eye", (await page.evaluate(() => document.getElementById("chameleon").dataset.idle)) === undefined);
+  await ctx.close();
+  const c2 = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: "reduce" }); const p2 = await c2.newPage();
+  await p2.clock.install(); await p2.goto(URL); await p2.mouse.move(5, 400); await p2.clock.fastForward(25000);
+  check("reduced motion: eye does not track or idle", await p2.evaluate(() => { const c = document.getElementById("chameleon"); return !c.dataset.idle && !c.style.getPropertyValue("--pupil-dx"); }));
+  await c2.close();
+}
 await browser.close(); server.close();
 console.log(fails ? `${fails} FAILED` : "all demo checks passed"); process.exit(fails ? 1 : 0);
